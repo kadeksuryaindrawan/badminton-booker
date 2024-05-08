@@ -18,7 +18,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Page Title -->
-	<title>Badminton Booker - {{ ucwords(request()->segment(1)) }}</title>
+	<title>Badminton Booker - @if (request()->segment(1) == 'home')
+                                    Dashboard
+                                @else
+                                    {{ ucwords(request()->segment(1)) }}
+                                @endif</title>
 
 	<!-- Favicon icon -->
 	<link rel="shortcut icon" type="image/png" href="{{ asset('admin') }}/images/favicon.png">
@@ -26,7 +30,8 @@
 	<!-- All StyleSheet -->
 	<link href="{{ asset('admin') }}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<link href="{{ asset('admin') }}/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
-
+    <!-- Datatable -->
+    <link href="{{ asset('admin') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 	<!-- Globle CSS -->
     <link href="{{ asset('admin') }}/css/style.css" rel="stylesheet">
 
@@ -79,7 +84,11 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                Dashboard
+                                @if (request()->segment(1) == 'home')
+                                    Dashboard
+                                @else
+                                    {{ ucwords(request()->segment(1)) }}
+                                @endif
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -152,7 +161,7 @@
 						</a>
 					</li>
                     <li class="{{ (request()->segment(1) == 'user') ? 'mm-active' : '' }}">
-                        <a href="{{ url('/user') }}" class="" aria-expanded="false">
+                        <a href="{{ route('user.index') }}" class="" aria-expanded="false">
 							<i class="fas fa-user"></i>
 							<span class="nav-text">User</span>
 						</a>
@@ -450,6 +459,10 @@
 <!-- Apex Chart -->
 <script src="{{ asset('admin') }}/vendor/apexchart/apexchart.js"></script>
 <script src="{{ asset('admin') }}/vendor/chartjs/chart.bundle.min.js"></script>
+
+<!-- Datatable -->
+<script src="{{ asset('admin') }}/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('admin') }}/js/plugins-init/datatables.init.js"></script>
 
 <!-- Chart piety plugin files -->
 <script src="{{ asset('admin') }}/vendor/peity/jquery.peity.min.js"></script>
