@@ -116,13 +116,13 @@
     <div class="sticky-wrapper">
       <div class="sticky-active">
         <div class="container position-relative z-index-common">
-          <div class="row align-items-center justify-content-between">
-            <div class="col-auto">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
               <div class="vs-logo">
-                <a href="index.html"><img src="{{ asset('landing') }}/img/logo.svg" alt="logo"></a>
+                <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/img/logo.svg" alt="logo"></a>
               </div>
             </div>
-            <div class="col text-end text-xl-center">
+            <div>
               <nav class="main-menu menu-style1 d-none d-lg-block">
                 <ul>
                   <li>
@@ -135,17 +135,11 @@
                     <a href="{{ url('/') }}">Lapangan</a>
                   </li>
                   <li>
-                    <a href="{{ url('/') }}">Contact</a>
+                    <a href="{{ url('/') }}">Contact Us</a>
                   </li>
                 </ul>
               </nav>
               <button class="vs-menu-toggle d-inline-block d-lg-none"><i class="fal fa-bars"></i></button>
-            </div>
-            <div class="col-auto d-none d-xl-block">
-              <div class="header-btns">
-                <a href="{{ url('/login') }}"><button><i class="fal fa-shopping-bag"></i><span
-                    class="button-badge">2</span></button></a>
-              </div>
             </div>
           </div>
         </div>
