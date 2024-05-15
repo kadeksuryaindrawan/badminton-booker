@@ -59,7 +59,7 @@
                                                                 <span class="bi bi-three-dots-vertical"></span>
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <a href="" class="dropdown-item"><i class="fas fa-info-circle"></i> Detail </a>
+                                                                {{-- <a href="" class="dropdown-item"><i class="fas fa-info-circle"></i> Detail </a> --}}
                                                                 <a href="{{ route('user.edit',$user->id) }}" class="dropdown-item"><i class="fa fa-edit" id="from1"></i> Edit</a>
                                                                 <form action="{{route('user.destroy',$user->id)}}" method="post" onsubmit="return confirm('Yakin hapus user?')">
                                                                     @csrf
