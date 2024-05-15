@@ -6,11 +6,24 @@
             <div class="container-fluid">
 
                 <div class="row">
+                    <div class="col-lg-12">
+                        @if(session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{session('success')}}
+                        </div>
+                        @endif
+
+                        @if(session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{session('error')}}
+                        </div>
+                        @endif
+                    </div>
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Daftar User</h4>
-                                <a href=""><button class="btn btn-primary">Tambah User</button></a>
+                                <a href="{{ route('user.create') }}"><button class="btn btn-primary">Tambah User</button></a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -47,8 +60,12 @@
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <a href="" class="dropdown-item"><i class="fas fa-info-circle"></i> Detail </a>
-                                                                <a href="" class="dropdown-item"><i class="fa fa-edit" id="from1"></i> Edit</a>
-                                                                <a href="" class="dropdown-item" onclick="return confirm('Yakin hapus user ?')"><i class="fa fa-trash"></i> Hapus</a>
+                                                                <a href="{{ route('user.edit',$user->id) }}" class="dropdown-item"><i class="fa fa-edit" id="from1"></i> Edit</a>
+                                                                <form action="{{route('user.destroy',$user->id)}}" method="post" onsubmit="return confirm('Yakin hapus user?')">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="dropdown-item"><i class="fa fa-trash"></i> Hapus</button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </td>

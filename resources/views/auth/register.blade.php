@@ -81,12 +81,6 @@
                                                 <div class="mb-3">
                                                     <label class="mb-1"><strong>Password Confirmation</strong></label>
                                                     <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
-
-                                                    @error('password_confirmation')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
