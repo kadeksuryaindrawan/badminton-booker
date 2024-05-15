@@ -135,7 +135,7 @@
                     <a href="{{ url('/') }}">Lapangan</a>
                   </li>
                   <li>
-                    <a href="{{ url('/') }}">Contact Us</a>
+                    <a href="{{ url('/') }}">Contact Us Nih</a>
                   </li>
                 </ul>
               </nav>
