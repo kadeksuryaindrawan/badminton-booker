@@ -54,7 +54,7 @@
     <div class="vs-menu-area text-center">
       <button class="vs-menu-toggle"><i class="fal fa-times"></i></button>
       <div class="mobile-logo">
-        <a href="index.html"><img src="{{ asset('landing') }}/img/logo.svg" alt="Travolo"></a>
+        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/img/logo.svg" alt="BAD BOOK"></a>
       </div>
       <div class="vs-mobile-menu">
         <ul>
@@ -68,7 +68,7 @@
             <a href="{{ url('/') }}">Lapangan</a>
             </li>
             <li>
-            <a href="{{ url('/') }}">Contact</a>
+            <a href="{{ url('/') }}">Contact Us</a>
             </li>
         </ul>
       </div>
