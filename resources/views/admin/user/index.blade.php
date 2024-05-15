@@ -8,13 +8,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         @if(session('success'))
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success solid" role="alert">
                             {{session('success')}}
                         </div>
                         @endif
 
                         @if(session('error'))
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger solid" role="alert">
                             {{session('error')}}
                         </div>
                         @endif
