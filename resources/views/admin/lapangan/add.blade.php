@@ -23,7 +23,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-sm-12 mb-3">
-                                            <label class="form-label">Harga</label>
+                                            <label class="form-label">Harga Per Jam</label>
                                             <input type="number" class="form-control" name="harga" value="{{ old('harga') }}" required>
                                             @error('harga')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
