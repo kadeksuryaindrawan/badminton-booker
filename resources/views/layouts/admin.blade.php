@@ -34,6 +34,7 @@
     <link href="{{ asset('admin') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 	<!-- Globle CSS -->
     <link href="{{ asset('admin') }}/css/style.css" rel="stylesheet">
+    <link href="{{ asset('admin/css/lightbox.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -167,7 +168,7 @@
 						</a>
 					</li>
                     <li class="{{ (request()->segment(1) == 'lapangan') ? 'mm-active' : '' }}">
-                        <a href="{{ url('/lapangan') }}" class="" aria-expanded="false">
+                        <a href="{{ route('lapangan.index') }}" class="" aria-expanded="false">
 							<i class="fas fa-map"></i>
 							<span class="nav-text">Lapangan</span>
 						</a>
@@ -474,6 +475,7 @@
 
 <script src="{{ asset('admin') }}/js/custom.min.js"></script>
 <script src="{{ asset('admin') }}/js/dlabnav-init.js"></script>
+<script src="{{ asset('admin/js/lightbox.js') }}"></script>
 
 
 <script>
