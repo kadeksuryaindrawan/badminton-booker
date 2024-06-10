@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gor;
 use App\Models\Lapangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LapanganController extends Controller
@@ -15,7 +17,10 @@ class LapanganController extends Controller
      */
     public function index()
     {
-        $lapangans = Lapangan::orderBy('created_at', 'desc')->get();
+        $admin_id = Auth::user()->id;
+        $gor = Gor::where('admin_id',$admin_id)->first();
+        $gor_id = $gor->id;
+        $lapangans = Lapangan::where('gor_id',$gor_id)->orderBy('created_at', 'desc')->get();
         return view('admin.lapangan.index', compact('lapangans'));
     }
 
@@ -47,16 +52,21 @@ class LapanganController extends Controller
             return redirect()->route('lapangan.create')->withErrors($validator)->withInput();
         }
         try {
+            $admin_id = Auth::user()->id;
+            $gor = Gor::where('admin_id', $admin_id)->first();
+            $gor_id = $gor->id;
             if ($request->hasFile('foto')) {
                 $file = md5(time()) . '_Foto_Lapangan_' . $request->file('foto')->getClientOriginalName();
                 $path = $request->file('foto')->storeAs('public/lapangan', $file);
                 Lapangan::create([
+                    "gor_id" => $gor_id,
                     "nama_lapangan" => $request->nama_lapangan,
                     "harga" => $request->harga,
                     "foto" => $file,
                 ]);
             } else {
                 Lapangan::create([
+                    "gor_id" => $gor_id,
                     "nama_lapangan" => $request->nama_lapangan,
                     "harga" => $request->harga,
                     "foto" => '',

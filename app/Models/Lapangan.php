@@ -10,8 +10,14 @@ class Lapangan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'gor_id',
         'nama_lapangan',
         'harga',
         'foto'
     ];
+
+    public function gor()
+    {
+        return $this->belongsTo(Gor::class, 'gor_id');
+    }
 }
