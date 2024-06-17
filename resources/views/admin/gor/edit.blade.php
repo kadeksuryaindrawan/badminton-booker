@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="col-sm-12 mb-3">
                                             <label class="form-label">Nama Gor</label>
-                                            <input type="text" class="form-control" name="nama_gor" value="{{ $gor->nama_gor }}" required>
+                                            <input type="text" class="form-control" name="nama_gor" placeholder="Lapangan 1, Lapangan 2, ..." value="{{ $gor->nama_gor }}" required>
                                             @error('nama_gor')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
                                             @enderror

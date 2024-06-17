@@ -18,14 +18,14 @@
                                     <div class="row">
                                         <div class="col-sm-12 mb-3">
                                             <label class="form-label">Nama Lapangan</label>
-                                            <input type="text" class="form-control" name="nama_lapangan" value="{{ $lapangan->nama_lapangan }}" required>
+                                            <input type="text" class="form-control" name="nama_lapangan" placeholder="Lapangan A, Lapangan B, ..." value="{{ $lapangan->nama_lapangan }}" required>
                                             @error('nama_lapangan')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="col-sm-12 mb-3">
                                             <label class="form-label">Harga Per Jam</label>
-                                            <input type="number" class="form-control" name="harga" value="{{ $lapangan->harga }}" required>
+                                            <input type="number" class="form-control" name="harga" placeholder="Masukkan Harga" value="{{ $lapangan->harga }}" required>
                                             @error('harga')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
                                             @enderror
