@@ -31,6 +31,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Foto</th>
                                                 <th>Nama Gor</th>
                                                 <th>Alamat</th>
                                                 <th>Admin</th>
@@ -44,6 +45,11 @@
                                             @foreach ($gors as $gor)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
+                                                    <td>
+                                                        <a class="example-image-link" href="{{ asset('storage/gor/'.$gor->foto) }}" data-lightbox="example-1">
+                                                            <img style="width: 50px; height: 50px; object-fit:cover;" src="{{ asset('storage/gor/'.$gor->foto) }}" alt="">
+                                                        </a>
+                                                    </td>
                                                     <td>{{ ucwords($gor->nama_gor) }}</td>
                                                     <td>{{ ucfirst($gor->alamat) }}</td>
                                                     <td>{{ ucwords($gor->admin->nama) }}</td>

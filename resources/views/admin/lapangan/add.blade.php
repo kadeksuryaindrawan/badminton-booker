@@ -17,22 +17,15 @@
                                     <div class="row">
                                         <div class="col-sm-12 mb-3">
                                             <label class="form-label">Nama Lapangan</label>
-                                            <input type="text" class="form-control" name="nama_lapangan" value="{{ old('nama_lapangan') }}" placeholder="Lapangan A, Lapangan B, ..." required>
+                                            <input type="text" class="form-control" name="nama_lapangan" value="{{ old('nama_lapangan') }}" placeholder="Example: Lapangan A" required>
                                             @error('nama_lapangan')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="col-sm-12 mb-3">
                                             <label class="form-label">Harga Per Jam</label>
-                                            <input type="number" class="form-control" name="harga" placeholder="Masukkan Harga" value="{{ old('harga') }}" required>
+                                            <input type="number" class="form-control" name="harga" placeholder="Example: 50000" value="{{ old('harga') }}" required>
                                             @error('harga')
-                                                <p class="text-danger text-sm">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="col-sm-12 mb-3">
-                                            <label class="form-label">Foto</label>
-                                            <input type="file" class="form-control" name="foto" value="{{ old('foto') }}" required>
-                                            @error('foto')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
                                             @enderror
                                         </div>

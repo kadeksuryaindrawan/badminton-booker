@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingController::class, 'index']);
+Route::get('/about-us', [LandingController::class, 'about']);
+Route::get('/daftar-gor', [LandingController::class, 'gor']);
+Route::get('/contact-us', [LandingController::class, 'contact']);
+Route::get('/daftar-lapangan/{id}', [LandingController::class, 'lapangan'])->name('daftar-lapangan');
+Route::get('/detail-lapangan/{id}', [LandingController::class, 'detail_lapangan'])->name('detail-lapangan');
 
 // Route::group(['middleware' => ['auth', 'role2:super admin,admin']], function () {
 //     Route::resource('user', UserController::class);

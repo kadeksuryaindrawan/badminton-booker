@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('admin_id');
             $table->string('nama_gor');
             $table->text('alamat');
+            $table->text('foto');
             $table->timestamps();
         });
     }

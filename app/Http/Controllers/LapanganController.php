@@ -19,9 +19,14 @@ class LapanganController extends Controller
     {
         $admin_id = Auth::user()->id;
         $gor = Gor::where('admin_id',$admin_id)->first();
-        $gor_id = $gor->id;
-        $lapangans = Lapangan::where('gor_id',$gor_id)->orderBy('created_at', 'desc')->get();
-        return view('admin.lapangan.index', compact('lapangans'));
+        if($gor == NULL){
+            $gor_id = NULL;
+        }
+        else{
+            $gor_id = $gor->id;
+        }
+        $lapangans = Lapangan::where('gor_id', $gor_id)->orderBy('created_at', 'desc')->get();
+        return view('admin.lapangan.index', compact('lapangans','gor_id'));
     }
 
     /**
@@ -45,7 +50,6 @@ class LapanganController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_lapangan' => ['required', 'string', 'max:255'],
             'harga' => ['required', 'numeric'],
-            'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
         ]);
 
         if ($validator->fails()) {
@@ -55,24 +59,11 @@ class LapanganController extends Controller
             $admin_id = Auth::user()->id;
             $gor = Gor::where('admin_id', $admin_id)->first();
             $gor_id = $gor->id;
-            if ($request->hasFile('foto')) {
-                $file = md5(time()) . '_Foto_Lapangan_' . $request->file('foto')->getClientOriginalName();
-                $path = $request->file('foto')->storeAs('public/lapangan', $file);
-                Lapangan::create([
-                    "gor_id" => $gor_id,
-                    "nama_lapangan" => $request->nama_lapangan,
-                    "harga" => $request->harga,
-                    "foto" => $file,
-                ]);
-            } else {
-                Lapangan::create([
-                    "gor_id" => $gor_id,
-                    "nama_lapangan" => $request->nama_lapangan,
-                    "harga" => $request->harga,
-                    "foto" => '',
-                ]);
-            }
-
+            Lapangan::create([
+                "gor_id" => $gor_id,
+                "nama_lapangan" => $request->nama_lapangan,
+                "harga" => $request->harga,
+            ]);
             return redirect()->route('lapangan.index')->with('success', 'Berhasil tambah lapangan!');
         } catch (\Throwable $th) {
             throw $th;
@@ -110,38 +101,19 @@ class LapanganController extends Controller
      */
     public function update(Request $request, Lapangan $lapangan)
     {
-        if ($request->hasFile('foto')) {
-            $validator = Validator::make($request->all(), [
-                'nama_lapangan' => ['required', 'string', 'max:255'],
-                'harga' => ['required', 'numeric'],
-                'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
-            ]);
-        } else {
-            $validator = Validator::make($request->all(), [
-                'nama_lapangan' => ['required', 'string', 'max:255'],
-                'harga' => ['required', 'numeric'],
-            ]);
-        }
+        $validator = Validator::make($request->all(), [
+            'nama_lapangan' => ['required', 'string', 'max:255'],
+            'harga' => ['required', 'numeric'],
+        ]);
 
         if ($validator->fails()) {
             return redirect()->route('lapangan.edit', ['lapangan' => $lapangan->id])->withErrors($validator)->withInput();
         }
         try {
-            if ($request->hasFile('foto')) {
-                unlink(storage_path('app/public/lapangan/' . $lapangan->foto));
-                $file = md5(time()) . '_Foto_Lapangan_' . $request->file('foto')->getClientOriginalName();
-                $path = $request->file('foto')->storeAs('public/lapangan', $file);
-                $lapangan->update([
-                    "nama_lapangan" => $request->nama_lapangan,
-                    "harga" => $request->harga,
-                    "foto" => $file,
-                ]);
-            } else {
-                $lapangan->update([
-                    "nama_lapangan" => $request->nama_lapangan,
-                    "harga" => $request->harga,
-                ]);
-            }
+            $lapangan->update([
+                "nama_lapangan" => $request->nama_lapangan,
+                "harga" => $request->harga,
+            ]);
 
             return redirect()->route('lapangan.index')->with('success', 'Berhasil edit lapangan!');
         } catch (\Throwable $th) {
@@ -157,7 +129,6 @@ class LapanganController extends Controller
      */
     public function destroy(Lapangan $lapangan)
     {
-        unlink(storage_path('app/public/lapangan/' . $lapangan->foto));
         $lapangan->delete();
         return redirect()->back()->with('success', 'Lapangan berhasil dihapus!');
     }

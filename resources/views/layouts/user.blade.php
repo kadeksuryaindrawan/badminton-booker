@@ -54,7 +54,7 @@
     <div class="vs-menu-area text-center">
       <button class="vs-menu-toggle"><i class="fal fa-times"></i></button>
       <div class="mobile-logo">
-        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/img/logo.svg" alt="BAD BOOK"></a>
+        <a href="{{ url('/') }}"><p style="font-size: 25px; font-weight: 600; letter-spacing: 1px;">BPS DENPASAR</p></a>
       </div>
       <div class="vs-mobile-menu">
         <ul>
@@ -62,13 +62,13 @@
             <a href="{{ url('/') }}">Home</a>
             </li>
             <li>
-            <a href="{{ url('/') }}">About Us</a>
+            <a href="{{ url('/about-us') }}">About Us</a>
             </li>
             <li>
-            <a href="{{ url('/') }}">Lapangan</a>
+            <a href="{{ url('/daftar-gor') }}">Gor</a>
             </li>
             <li>
-            <a href="{{ url('/') }}">Contact Us</a>
+            <a href="{{ url('/contact-us') }}">Contact Us</a>
             </li>
         </ul>
       </div>
@@ -78,8 +78,8 @@
   <!--==============================
     Header Area
   ==============================-->
-  <header class="vs-header header-layout2">
-    <div class="header-top">
+  <header class="vs-header header-layout1">
+    <div class="header-top py-2">
       <div class="container">
         <div class="row justify-content-between align-items-center">
           <div class="col d-none d-lg-block">
@@ -90,12 +90,10 @@
             </ul>
           </div>
           <div class="col-auto">
-            <div class="header-social">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-pinterest-p"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
+            <div class="header-btns">
+                <button class="sideCartToggler"><i class="fal fa-shopping-bag"></i><span
+                    class="button-badge">2</span></button>
+              </div>
           </div>
           <div class="col-auto">
             @if (Auth::check() == false)
@@ -119,27 +117,28 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <div class="vs-logo">
-                <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/img/logo.svg" alt="logo"></a>
+                <a href="{{ url('/') }}"><p class="sec-subtitle" style="font-size: 25px; font-weight: 800; letter-spacing: 1px; margin-top:10px;">BPS DENPASAR</p></a>
               </div>
             </div>
-            <div>
+            <div class="col-auto">
               <nav class="main-menu menu-style1 d-none d-lg-block">
                 <ul>
                   <li>
                     <a href="{{ url('/') }}">Home</a>
                   </li>
                   <li>
-                    <a href="{{ url('/') }}">About Us</a>
+                    <a href="{{ url('/about-us') }}">About Us</a>
                   </li>
                   <li>
-                    <a href="{{ url('/') }}">Lapangan</a>
+                    <a href="{{ url('/daftar-gor') }}">Gor</a>
                   </li>
                   <li>
-                    <a href="{{ url('/') }}">Contact Us</a>
+                    <a href="{{ url('/contact-us') }}">Contact Us</a>
                   </li>
                 </ul>
               </nav>
               <button class="vs-menu-toggle d-inline-block d-lg-none"><i class="fal fa-bars"></i></button>
+            </div>
             </div>
           </div>
         </div>
@@ -160,29 +159,22 @@
             <div class="widget footer-widget">
               <div class="vs-widget-about">
                 <div class="footer-logo">
-                  <a href="index.html"><img src="{{ asset('landing') }}/img/white-logo.svg" alt="Travolo" class="logo" /></a>
+                  <a href="{{ url('/') }}"><p style="font-size: 25px; font-weight: 800; letter-spacing: 1px;">BPS DENPASAR</p></a>
                 </div>
                 <p class="footer-text">Curabitur aliquet quam id dui bandit posuere blandit. Vivamfdsus magna justo
                   blandit aliquet.</p>
-                <div class="social-style1">
-                  <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-pinterest-p"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                </div>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-xl-2">
             <div class="widget widget_nav_menu footer-widget">
-              <h3 class="widget_title">Useful Links</h3>
+              <h3 class="widget_title">Menu</h3>
               <div class="menu-all-pages-container">
                 <ul class="menu">
-                  <li><a href="index.html"><i class="far fa-angle-right"></i> Home</a></li>
-                  <li><a href="destinations.html"><i class="far fa-angle-right"></i> Destinations</a></li>
-                  <li><a href="tours.html"><i class="far fa-angle-right"></i> Tour</a></li>
-                  <li><a href="shop.html"><i class="far fa-angle-right"></i> Shop</a></li>
-                  <li><a href="blog.html"><i class="far fa-angle-right"></i> Blog</a></li>
+                  <li><a href="{{ url('/') }}"><i class="far fa-angle-right"></i> Home</a></li>
+                  <li><a href="{{ url('/about-us') }}"><i class="far fa-angle-right"></i> About Us</a></li>
+                  <li><a href="{{ url('/daftar-gor') }}"><i class="far fa-angle-right"></i> Gor</a></li>
+                  <li><a href="{{ url('/contact') }}"><i class="far fa-angle-right"></i> Contact Us</a></li>
                 </ul>
               </div>
             </div>
@@ -200,25 +192,6 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-xl-3">
-            <div class="widget footer-widget">
-              <h4 class="widget_title">Our Instagram</h4>
-              <div class="sidebar-gallery">
-                <a href="{{ asset('landing') }}/img/footer/insta1.jpg" class="popup-image"><img src="{{ asset('landing') }}/img/footer/insta1.jpg" alt="Gallery Image" class="w-100" />
-                </a>
-                <a href="{{ asset('landing') }}/img/footer/insta2.jpg" class="popup-image"><img src="{{ asset('landing') }}/img/footer/insta2.jpg" alt="Gallery Image" class="w-100" />
-                </a>
-                <a href="{{ asset('landing') }}/img/footer/insta3.jpg" class="popup-image"><img src="{{ asset('landing') }}/img/footer/insta3.jpg" alt="Gallery Image" class="w-100" />
-                </a>
-                <a href="{{ asset('landing') }}/img/footer/insta4.jpg" class="popup-image"><img src="{{ asset('landing') }}/img/footer/insta4.jpg" alt="Gallery Image" class="w-100" />
-                </a>
-                <a href="{{ asset('landing') }}/img/footer/insta5.jpg" class="popup-image"><img src="{{ asset('landing') }}/img/footer/insta5.jpg" alt="Gallery Image" class="w-100" />
-                </a>
-                <a href="{{ asset('landing') }}/img/footer/insta6.jpg" class="popup-image"><img src="{{ asset('landing') }}/img/footer/insta6.jpg" alt="Gallery Image" class="w-100" />
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -226,8 +199,8 @@
       <div class="copyright-wrap">
         <div class="row justify-content-between align-items-center">
           <div class="col-lg-12">
-            <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> <script>document.write(new Date().getFullYear())</script> <a href="index.html">Travolo</a>.
-              All Rights Reserved By <a href="https://themeforest.net/user/vecuro">Vecuro</a></p>
+            <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> <script>document.write(new Date().getFullYear())</script> <a href="{{ url('/') }}">BPS DENPASAR</a>.
+              All Rights Reserved</p>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gor;
+use App\Models\Lapangan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -49,17 +50,32 @@ class GorController extends Controller
             'admin_id' => ['required'],
             'nama_gor' => ['required', 'string', 'max:255'],
             'alamat' => ['required'],
+            'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
         ]);
 
         if ($validator->fails()) {
             return redirect()->route('gor.create')->withErrors($validator)->withInput();
         }
         try {
-            Gor::create([
-                "admin_id" => $request->admin_id,
-                "nama_gor" => $request->nama_gor,
-                "alamat" => $request->alamat,
-            ]);
+            if ($request->hasFile('foto')) {
+                $file = md5(time()) . '_Foto_Gor_' . $request->file('foto')->getClientOriginalName();
+                $path = $request->file('foto')->storeAs('public/gor', $file);
+                Gor::create([
+                    "admin_id" => $request->admin_id,
+                    "nama_gor" => $request->nama_gor,
+                    "alamat" => $request->alamat,
+                    "foto" => $file,
+                ]);
+
+            } else {
+                Gor::create([
+                    "admin_id" => $request->admin_id,
+                    "nama_gor" => $request->nama_gor,
+                    "alamat" => $request->alamat,
+                    "foto" => '',
+                ]);
+            }
+
             return redirect()->route('gor.index')->with('success', 'Berhasil tambah gor!');
         } catch (\Throwable $th) {
             throw $th;
@@ -109,22 +125,44 @@ class GorController extends Controller
      */
     public function update(Request $request, Gor $gor)
     {
-        $validator = Validator::make($request->all(), [
-            'admin_id' => ['required'],
-            'nama_gor' => ['required', 'string', 'max:255'],
-            'alamat' => ['required'],
-        ]);
+        if ($request->hasFile('foto')) {
+            $validator = Validator::make($request->all(), [
+                'admin_id' => ['required'],
+                'nama_gor' => ['required', 'string', 'max:255'],
+                'alamat' => ['required'],
+                'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'admin_id' => ['required'],
+                'nama_gor' => ['required', 'string', 'max:255'],
+                'alamat' => ['required'],
+            ]);
+        }
 
         if ($validator->fails()) {
             return redirect()->route('gor.edit', ['gor' => $gor->id])->withErrors($validator)->withInput();
         }
 
         try {
-            $gor->update([
-                "admin_id" => $request->admin_id,
-                "nama_gor" => $request->nama_gor,
-                "alamat" => $request->alamat,
-            ]);
+            if ($request->hasFile('foto')) {
+                unlink(storage_path('app/public/gor/' . $gor->foto));
+                $file = md5(time()) . '_Foto_Gor_' . $request->file('foto')->getClientOriginalName();
+                $path = $request->file('foto')->storeAs('public/gor', $file);
+                $gor->update([
+                    "admin_id" => $request->admin_id,
+                    "nama_gor" => $request->nama_gor,
+                    "alamat" => $request->alamat,
+                    "foto" => $file,
+                ]);
+            } else {
+                $gor->update([
+                    "admin_id" => $request->admin_id,
+                    "nama_gor" => $request->nama_gor,
+                    "alamat" => $request->alamat,
+                ]);
+            }
+
             return redirect()->route('gor.index')->with('success', 'Berhasil edit gor!');
         } catch (\Throwable $th) {
             throw $th;
@@ -139,6 +177,8 @@ class GorController extends Controller
      */
     public function destroy(Gor $gor)
     {
+        unlink(storage_path('app/public/gor/' . $gor->foto));
+        Lapangan::where('gor_id',$gor->id)->delete();
         $gor->delete();
         return redirect()->back()->with('success', 'Gor berhasil dihapus!');
     }

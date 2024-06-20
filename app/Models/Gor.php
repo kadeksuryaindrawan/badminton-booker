@@ -12,7 +12,8 @@ class Gor extends Model
     protected $fillable = [
         'admin_id',
         'nama_gor',
-        'alamat'
+        'alamat',
+        'foto'
     ];
 
     public function admin()

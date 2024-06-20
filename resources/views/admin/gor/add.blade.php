@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="col-sm-12 mb-3">
                                             <label class="form-label">Nama Gor</label>
-                                            <input type="text" class="form-control" name="nama_gor" placeholder="Lapangan 1, Lapangan 2, ..." value="{{ old('nama_gor') }}" required>
+                                            <input type="text" class="form-control" name="nama_gor" placeholder="Masukkan Nama Gor" value="{{ old('nama_gor') }}" required>
                                             @error('nama_gor')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
                                             @enderror
@@ -38,6 +38,13 @@
                                             <label class="form-label">Alamat</label>
                                             <textarea name="alamat" class="form-control" id="" cols="30" rows="10"></textarea>
                                             @error('alamat')
+                                                <p class="text-danger text-sm">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-12 mb-3">
+                                            <label class="form-label">Foto</label>
+                                            <input type="file" class="form-control" name="foto" value="{{ old('foto') }}" required>
+                                            @error('foto')
                                                 <p class="text-danger text-sm">{{ $message }}</p>
                                             @enderror
                                         </div>

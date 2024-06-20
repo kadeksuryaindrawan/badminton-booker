@@ -63,7 +63,7 @@
         <div class="nav-header">
             <a href="{{ url('/') }}" class="brand-logo mx-2 text-center">
 
-                <h4 class="text-primary text-center" style="font-weight: 600;">BAD BOOK</h4>
+                <p class="text-primary" style="font-size: 13px; font-weight: 800; letter-spacing: 1px;">BPS DENPASAR</p>
 
             </a>
             <div class="nav-control">

@@ -13,7 +13,6 @@ class Lapangan extends Model
         'gor_id',
         'nama_lapangan',
         'harga',
-        'foto'
     ];
 
     public function gor()

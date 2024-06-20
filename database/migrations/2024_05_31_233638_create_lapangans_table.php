@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('gor_id');
             $table->string('nama_lapangan');
             $table->integer('harga');
-            $table->text('foto');
             $table->timestamps();
         });
     }
