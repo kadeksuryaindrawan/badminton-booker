@@ -54,7 +54,7 @@
     <div class="vs-menu-area text-center">
       <button class="vs-menu-toggle"><i class="fal fa-times"></i></button>
       <div class="mobile-logo">
-        <a href="{{ url('/') }}"><p style="font-size: 25px; font-weight: 600; letter-spacing: 1px;">BPS DENPASAR</p></a>
+        <a href="{{ url('/') }}"><p style="font-size: 20px; font-weight: 600; letter-spacing: 1px;">BADMINTON BOOKER</p></a>
       </div>
       <div class="vs-mobile-menu">
         <ul>
@@ -117,7 +117,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <div class="vs-logo">
-                <a href="{{ url('/') }}"><p class="sec-subtitle" style="font-size: 25px; font-weight: 800; letter-spacing: 1px; margin-top:10px;">BPS DENPASAR</p></a>
+                <a href="{{ url('/') }}"><p class="sec-subtitle" style="font-size: 20px; font-weight: 800; letter-spacing: 1px; margin-top:10px;">BADMINTON BOOKER</p></a>
               </div>
             </div>
             <div class="col-auto">
@@ -159,7 +159,7 @@
             <div class="widget footer-widget">
               <div class="vs-widget-about">
                 <div class="footer-logo">
-                  <a href="{{ url('/') }}"><p style="font-size: 25px; font-weight: 800; letter-spacing: 1px;">BPS DENPASAR</p></a>
+                  <a href="{{ url('/') }}"><p style="font-size: 20px; font-weight: 800; letter-spacing: 1px;">BADMINTON BOOKER</p></a>
                 </div>
                 <p class="footer-text">Curabitur aliquet quam id dui bandit posuere blandit. Vivamfdsus magna justo
                   blandit aliquet.</p>
@@ -199,7 +199,7 @@
       <div class="copyright-wrap">
         <div class="row justify-content-between align-items-center">
           <div class="col-lg-12">
-            <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> <script>document.write(new Date().getFullYear())</script> <a href="{{ url('/') }}">BPS DENPASAR</a>.
+            <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> <script>document.write(new Date().getFullYear())</script> <a href="{{ url('/') }}">BADMINTON BOOKER</a>.
               All Rights Reserved</p>
           </div>
         </div>

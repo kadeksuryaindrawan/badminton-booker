@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gor;
+use App\Models\JadwalLapangan;
 use App\Models\Lapangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -129,6 +130,7 @@ class LapanganController extends Controller
      */
     public function destroy(Lapangan $lapangan)
     {
+        JadwalLapangan::where('lapangan_id',$lapangan->id)->delete();
         $lapangan->delete();
         return redirect()->back()->with('success', 'Lapangan berhasil dihapus!');
     }

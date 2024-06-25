@@ -37,7 +37,7 @@
                                 <div class="auth-form">
 									<div class="text-center mb-3">
 										<a href="{{ url('/') }}" class="brand-logo">
-                                            <p class="text-primary" style="font-size: 25px; font-weight: 800; letter-spacing: 1px;">BPS DENPASAR</p>
+                                            <p class="text-primary" style="font-size: 20px; font-weight: 800; letter-spacing: 1px;">BADMINTON BOOKER</p>
 										</a>
 									</div>
                                     <h4 class="text-center mb-4">Sign in your account</h4>

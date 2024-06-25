@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GorController;
+use App\Http\Controllers\JadwalLapanganController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\UserController;
@@ -37,6 +38,12 @@ Route::group(['middleware' => ['auth', 'role:super admin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('lapangan', LapanganController::class);
+    Route::get('/daftar-jadwal/{id}', [JadwalLapanganController::class, 'index'])->name('daftar-jadwal');
+    Route::get('/tambah-jadwal/{id}', [JadwalLapanganController::class, 'tambah'])->name('tambah-jadwal');
+    Route::post('/add-jadwal/{id}', [JadwalLapanganController::class, 'add'])->name('add-jadwal');
+    Route::get('/edit-jadwal/{id}', [JadwalLapanganController::class, 'edit'])->name('edit-jadwal');
+    Route::put('/update-jadwal/{id}', [JadwalLapanganController::class, 'update'])->name('update-jadwal');
+    Route::delete('/hapus-jadwal/{id}', [JadwalLapanganController::class, 'hapus'])->name('hapus-jadwal');
 });
 
 Auth::routes();

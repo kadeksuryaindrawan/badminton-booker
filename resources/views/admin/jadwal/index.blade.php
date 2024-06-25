@@ -22,10 +22,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Daftar Lapangan</h4>
-                                @if ($gor_id !== NULL)
-                                    <a href="{{ route('lapangan.create') }}"><button class="btn btn-primary">Tambah Lapangan</button></a>
-                                @endif
+                                <h4 class="card-title">Daftar Jadwal {{ $lapangan->nama_lapangan }}</h4>
+                                <a href="{{ route('tambah-jadwal',$lapangan->id) }}"><button class="btn btn-primary">Tambah Jadwal</button></a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -33,8 +31,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Lapangan</th>
-                                                <th>Harga</th>
+                                                <th>Jadwal</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -42,11 +39,10 @@
                                             @php
                                                 $no=1;
                                             @endphp
-                                            @foreach ($lapangans as $lapangan)
+                                            @foreach ($jadwals as $jadwal)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ ucwords($lapangan->nama_lapangan) }}</td>
-                                                    <td>Rp. {{ number_format($lapangan->harga,0,",",".") }}</td>
+                                                    <td>{{ ucwords($jadwal->jadwal) }}</td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <button id="toa" class="btn btn-sm btn-primary" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -54,9 +50,8 @@
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 {{-- <a href="" class="dropdown-item"><i class="fas fa-info-circle"></i> Detail </a> --}}
-                                                                <a href="{{ route('daftar-jadwal',$lapangan->id) }}" class="dropdown-item"><i class="fa fa-edit" id="from1"></i> Jadwal</a>
-                                                                <a href="{{ route('lapangan.edit',$lapangan->id) }}" class="dropdown-item"><i class="fa fa-edit" id="from1"></i> Edit</a>
-                                                                <form action="{{route('lapangan.destroy',$lapangan->id)}}" method="post" onsubmit="return confirm('Yakin hapus lapangan?')">
+                                                                <a href="{{ route('edit-jadwal',$jadwal->id) }}" class="dropdown-item"><i class="fa fa-edit" id="from1"></i> Edit</a>
+                                                                <form action="{{route('hapus-jadwal',$jadwal->id)}}" method="post" onsubmit="return confirm('Yakin hapus jadwal?')">
                                                                     @csrf
                                                                     @method('delete')
                                                                     <button class="dropdown-item"><i class="fa fa-trash"></i> Hapus</button>

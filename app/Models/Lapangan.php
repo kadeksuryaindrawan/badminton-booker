@@ -19,4 +19,9 @@ class Lapangan extends Model
     {
         return $this->belongsTo(Gor::class, 'gor_id');
     }
+
+    public function jadwal_lapangan()
+    {
+        return $this->hasMany(JadwalLapangan::class);
+    }
 }
