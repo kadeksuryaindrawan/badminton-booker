@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Gor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,8 +30,13 @@ class HomeController extends Controller
             return view('admin.dashboard.index');
         }
         else{
+            if (Auth::check() == true) {
+                $count_cart = Cart::where('user_id', Auth::user()->id)->count();
+            } else {
+                $count_cart = 0;
+            }
             $gors = Gor::orderBy('created_at', 'desc')->get();
-            return view('index',compact('gors'));
+            return view('index',compact('gors','count_cart'));
         }
 
     }

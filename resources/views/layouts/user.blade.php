@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="{{ asset('landing') }}/css/slick.min.css">
   <!-- Theme Custom CSS -->
   <link rel="stylesheet" href="{{ asset('landing') }}/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -70,6 +71,15 @@
             <li>
             <a href="{{ url('/contact-us') }}">Contact Us</a>
             </li>
+            @if (Auth::check() == true)
+                <li class="menu-item-has-children">
+                    <a href="#">{{ ucwords(Auth::user()->nama) }}</a>
+                    <ul class="sub-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">History Transaksi</a></li>
+                    </ul>
+                </li>
+            @endif
         </ul>
       </div>
     </div>
@@ -91,8 +101,13 @@
           </div>
           <div class="col-auto">
             <div class="header-btns">
-                <button class="sideCartToggler"><i class="fal fa-shopping-bag"></i><span
-                    class="button-badge">2</span></button>
+                <a href="{{ url('/cart') }}">
+                    <button class=""><i class="fal fa-shopping-bag"></i>
+                        @if (Auth::check() == true)
+                        <span class="button-badge">{{ $count_cart }}</span>
+                        @endif
+                    </button>
+                </a>
               </div>
           </div>
           <div class="col-auto">
@@ -135,6 +150,15 @@
                   <li>
                     <a href="{{ url('/contact-us') }}">Contact Us</a>
                   </li>
+                    @if (Auth::check() == true)
+                        <li class="menu-item-has-children">
+                            <a href="#">{{ ucwords(Auth::user()->nama) }}</a>
+                            <ul class="sub-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">History Transaksi</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
               </nav>
               <button class="vs-menu-toggle d-inline-block d-lg-none"><i class="fal fa-bars"></i></button>
