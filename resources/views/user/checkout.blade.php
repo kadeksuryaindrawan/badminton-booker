@@ -47,7 +47,6 @@
             <div class="row ">
             <div class="col-lg-12">
                 <h2 class="h4">Billing Details</h2>
-                <form action="#" class="woocommerce-cart-form">
                 <div class="row">
                 <input type="hidden" name="user_id" id="" value="{{ $user->id }}">
                 <input type="hidden" name="total" value="{{ $total_cart }}">

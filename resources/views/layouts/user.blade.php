@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Badminton Booker - Tempat Sewa Lapangan</title>
+  <title>Badminton Booker - Tempat Sewa Lapangan Denpasar</title>
   <meta name="author" content="vecuro">
   <meta name="description" content="Travolo -  Travel Agency & Tour Booking HTML Template">
   <meta name="keywords" content="Travolo -  Travel Agency & Tour Booking HTML Template">
@@ -75,8 +75,8 @@
                 <li class="menu-item-has-children">
                     <a href="#">{{ ucwords(Auth::user()->nama) }}</a>
                     <ul class="sub-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">History Transaksi</a></li>
+                    <li><a href="{{ route('profile-user',Auth::user()->id) }}">Profile</a></li>
+                    <li><a href="{{ url('/histori-transaksi') }}">Histori Transaksi</a></li>
                     </ul>
                 </li>
             @endif
@@ -94,9 +94,9 @@
         <div class="row justify-content-between align-items-center">
           <div class="col d-none d-lg-block">
             <ul class="header-contact">
-              <li><i class="fas fa-envelope"></i> <a href="mailto:info@travolo.com">info@travolo.com</a>
+              <li><i class="fas fa-envelope"></i> <a href="mailto:info@travolo.com">info@badmintonbooker.com</a>
               </li>
-              <li><i class="fas fa-phone-alt"></i> <a href="tel:02073885619">020 7388 5619</a></li>
+              <li><i class="fas fa-phone-alt"></i> <a href="#">020 7388 5619</a></li>
             </ul>
           </div>
           <div class="col-auto">
@@ -154,8 +154,8 @@
                         <li class="menu-item-has-children">
                             <a href="#">{{ ucwords(Auth::user()->nama) }}</a>
                             <ul class="sub-menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">History Transaksi</a></li>
+                            <li><a href="{{ route('profile-user',Auth::user()->id) }}">Profile</a></li>
+                            <li><a href="{{ url('/histori-transaksi') }}">Histori Transaksi</a></li>
                             </ul>
                         </li>
                     @endif
@@ -185,8 +185,7 @@
                 <div class="footer-logo">
                   <a href="{{ url('/') }}"><p style="font-size: 20px; font-weight: 800; letter-spacing: 1px;">BADMINTON BOOKER</p></a>
                 </div>
-                <p class="footer-text">Curabitur aliquet quam id dui bandit posuere blandit. Vivamfdsus magna justo
-                  blandit aliquet.</p>
+                <p class="footer-text">Tempat sewa lapangan bulu tangkis denpasar yang sudah terpercaya.</p>
               </div>
             </div>
           </div>
@@ -208,9 +207,8 @@
               <h3 class="widget_title">Contact</h3>
               <div class="menu-all-pages-container">
                 <ul class="menu">
-                  <li><a href="#"><i class="fas fa-map-marker-alt"></i> Fifth Avenue 5501, Broadway, New York Morris
-                      Street.</a></li>
-                  <li><a href="#"><i class="fas fa-envelope"></i> info@travolo.com</a></li>
+                  <li><a href="#"><i class="fas fa-map-marker-alt"></i> Denpasar</a></li>
+                  <li><a href="#"><i class="fas fa-envelope"></i> info@badmintonbooker.com</a></li>
                   <li><a href="#"><i class="fas fa-phone-alt"></i> +880 1234 567890</a></li>
                 </ul>
               </div>

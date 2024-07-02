@@ -8,11 +8,11 @@
     <div class="breadcumb-wrapper" data-bg-src="{{ asset('landing') }}/img/breadcumb/breadcumb-bg.jpg">
         <div class="container z-index-common">
         <div class="breadcumb-content">
-            <h1 class="breadcumb-title">Cart</h1>
+            <h1 class="breadcumb-title">Detail Histori</h1>
             <div class="breadcumb-menu-wrap">
             <ul class="breadcumb-menu">
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li>Cart</li>
+                <li>Detail Histori</li>
             </ul>
             </div>
         </div>
@@ -23,9 +23,9 @@
         ==============================-->
 
     <!--==============================
-        Cart Area Start
+        pemesanan Area Start
         ==============================-->
-    <div class="space vs-cart-wrapper">
+    <div class="space vs-pemesanan-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -42,6 +42,35 @@
                         @endif
                     </div>
             </div>
+            <h3 class="text-center">Detail Histori</h3>
+            <div class="d-flex justify-content-between mb-3">
+                <div class="">
+                    <p>Transaction ID : <strong>{{ $pemesanan->transaction_id }}</strong></p>
+                    <p>Tanggal Pemesanan : {{ date("d M Y H:i:s",strtotime($pemesanan->created_at)) }}</p>
+                    <p>Status :
+                        @if ($pemesanan->transaction_status == 'menunggu konfirmasi')
+                            <span class="text-warning">{{ $pemesanan->transaction_status }}</span>
+                        @elseif($pemesanan->transaction_status == 'terbayar')
+                            <span class="text-success">{{ $pemesanan->transaction_status }}</span>
+                        @else
+                            <span class="text-danger">{{ $pemesanan->transaction_status }}</span>
+                        @endif
+                    </p>
+                    <p>Keterangan :
+                        @if ($pemesanan->keterangan == null)
+                            <span>-</span>
+                        @else
+                            <span>{{ $pemesanan->keterangan }}</span>
+                        @endif
+                    </p>
+                </div>
+                <div class="">
+                    <p>Nama Bank Pelanggan : {{ $pemesanan->nama_bank }}</p>
+                    <p>No Rekening Pelanggan : {{ $pemesanan->no_bank }}</p>
+                    <p>Pemilik Rekening : {{ $pemesanan->pemilik_bank }}</p>
+                    <p>Tanggal Transfer : {{ date("d M Y",strtotime($pemesanan->tanggal_bayar)) }}</p>
+                </div>
+            </div>
             <div class="table-responsive">
             <table class="cart_table">
                 <thead>
@@ -52,73 +81,57 @@
                     <th class="cart-col-price">Tanggal Booking</th>
                     <th class="cart-col-quantity">Jadwal</th>
                     <th class="cart-col-total">Total</th>
-                    <th class="cart-col-remove">Remove</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($carts as $cart)
-                        <tr class="cart_item">
+                    @foreach ($detail_orders as $detail_order)
+                        <tr class="detail_order_item">
                             <td data-title="foto">
-                            <a class="cart-productimage" href="{{ route('detail-lapangan',$cart->lapangan->id) }}">
+                            <a class="detail_order-productimage" href="{{ route('detail-lapangan',$detail_order->lapangan->id) }}">
                                 <img style="width: 70px; height: 50px; object-fit:cover;"
-                                src="{{ asset('storage/gor/'.$cart->lapangan->gor->foto) }}" alt="Image" />
+                                src="{{ asset('storage/gor/'.$detail_order->lapangan->gor->foto) }}" alt="Image" />
                             </a>
                             </td>
                             <td data-title="gor">
-                            <span>{{ ucwords($cart->lapangan->gor->nama_gor) }}</span>
+                            <span>{{ ucwords($detail_order->lapangan->gor->nama_gor) }}</span>
                             </td>
                             <td data-title="lapangan">
-                            <a class="" href="{{ route('detail-lapangan',$cart->lapangan->id) }}">{{ ucwords($cart->lapangan->nama_lapangan) }}</a>
+                            <a class="" href="{{ route('detail-lapangan',$detail_order->lapangan->id) }}">{{ ucwords($detail_order->lapangan->nama_lapangan) }}</a>
                             </td>
                             <td data-title="tanggal">
-                            <span class="tanggal">{{ date("d M Y",strtotime($cart->tanggal)) }}</span>
+                            <span class="tanggal">{{ date("d M Y",strtotime($detail_order->tanggal)) }}</span>
                             </td>
                             <td data-title="jadwal">
-                                <span class="jadwal">{{ $cart->jadwal }}</span>
+                                <span class="jadwal">{{ $detail_order->jadwal }}</span>
                             </td>
                             <td data-title="Total">
-                            <span class="amount">Rp. {{ number_format($cart->total,0,",",".") }}</span>
-                            </td>
-                            <td data-title="Remove">
-                                <form action="{{ route('delete-cart',$cart->id) }}" method="post" onsubmit="return confirm('Yakin hapus lapangan dari cart?')">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn-xs btn-danger"><i class="fal fa-trash-alt"></i></button>
-                                </form>
+                            <span class="amount">Rp. {{ number_format($detail_order->total,0,",",".") }}</span>
                             </td>
                         </tr>
                     @endforeach
-
-                <tr>
-                    <td colspan="7" class="actions">
-                    <a href="{{ url('/daftar-gor') }}" class="vs-btn style4">Lihat Lapangan Lain</a>
-                    </td>
-                </tr>
                 </tbody>
             </table>
             </div>
         <div class="row justify-content-end">
             <div class="col-md-8 col-lg-7 col-xl-6">
-            <h2 class="h4 summary-title">Cart Total</h2>
+            <h2 class="h4 summary-title">Total</h2>
             <table class="cart_totals">
                 <tbody>
                 <tr>
                     <td>Total</td>
                     <td data-title="Cart Total">
-                    <span class="amount">Rp. {{ number_format($total_cart,0,",",".") }}</span>
+                    <span class="amount">Rp. {{ number_format($total,0,",",".") }}</span>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            @if ($carts->isNotEmpty())
-                <a href="{{ url('/checkout') }}" class="vs-btn w-100 style4">Proses Checkout</a>
-            @endif
+            <a href="{{ url('/histori-transaksi') }}" class="vs-btn w-100 style4">Kembali</a>
             </div>
         </div>
         </div>
     </div>
     <!--==============================
-        Cart Area End
+        pemesanan Area End
         ==============================-->
 
 @endsection

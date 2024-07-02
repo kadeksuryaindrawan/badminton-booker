@@ -7,6 +7,7 @@ use App\Models\DetailOrder;
 use App\Models\Gor;
 use App\Models\JadwalLapangan;
 use App\Models\Lapangan;
+use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,5 +104,22 @@ class LandingController extends Controller
                     ?>
                 </select>
         <?php
+    }
+
+    public function histori_transaksi()
+    {
+        $count_cart = $this->count_cart();
+        $pemesanans = Pemesanan::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $total_cart = Cart::where('user_id', Auth::user()->id)->sum('total');
+        return view('user.historitransaksi', compact('pemesanans', 'total_cart', 'count_cart'));
+    }
+
+    public function detail_histori($id)
+    {
+        $count_cart = $this->count_cart();
+        $detail_orders = DetailOrder::where('pemesanan_id', $id)->orderBy('created_at', 'desc')->get();
+        $pemesanan = Pemesanan::find($id);
+        $total = $pemesanan->total;
+        return view('user.detailhistori', compact('detail_orders', 'pemesanan', 'total', 'count_cart'));
     }
 }

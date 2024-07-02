@@ -56,7 +56,7 @@ class JadwalLapanganController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('edit-lapangan', ['jadwal' => $id])->withErrors($validator)->withInput();
+            return redirect()->route('edit-lapangan', $id)->withErrors($validator)->withInput();
         }
         try {
             $jadwal->update([

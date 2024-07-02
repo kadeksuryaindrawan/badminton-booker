@@ -8,31 +8,29 @@
     <section class="hero-layout1">
         <div>
         <div class="vs-carousel hero-slider2" data-slide-show="1" data-fade="true">
-            <div class="hero-slide hero-mask" data-bg-src="{{ asset('landing') }}/img/banner/hero2-bg.jpg">
+            <div class="hero-slide hero-mask" data-bg-src="{{ asset('landing') }}/img/banner/1.jpg">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                    <span class="hero-subtitle">Let's Go Now</span>
-                    <h1 class="hero-title">Let’s Enjoy Your Trip With Travolo</h1>
-                    <p class="hero-text">Cras ultricies ligula sed magna dictum porta. Vivamus magna justo, lacinia eget
-                        consectetur sed, convallis at tellus. Quisque velit nisi, pretium ut lacignia convallis at tellus.</p>
-                    <a href="about.html" class="vs-btn style4">Read More</a>
+                    <span class="hero-subtitle">Ayo Hidup Sehat</span>
+                    <h1 class="hero-title">Booking Lapangan Anda Sekarang</h1>
+                    <p class="hero-text">Kami Menyediakan Berbagai Gor Dan Lapangan Bulu Tangkis Untuk Anda.</p>
+                    <a href="{{ url('/gor') }}" class="vs-btn style4">Daftar Gor</a>
                     </div>
                 </div>
                 </div>
             </div>
             </div>
-            <div class="hero-slide hero-mask" data-bg-src="{{ asset('landing') }}/img/banner/hero2-bg2.jpg">
+            <div class="hero-slide hero-mask" data-bg-src="{{ asset('landing') }}/img/banner/2.jpg">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                    <span class="hero-subtitle">Let's Go Now</span>
-                    <h1 class="hero-title">Riding The Tide Of Endless World</h1>
-                    <p class="hero-text">Cras ultricies ligula sed magna dictum porta. Vivamus magna justo, lacinia eget
-                        consectetur sed, convallis at tellus. Quisque velit nisi, pretium ut lacignia convallis at tellus.</p>
-                    <a href="about.html" class="vs-btn style4">Read More</a>
+                    <span class="hero-subtitle">Ayo Hidup Sehat</span>
+                    <h1 class="hero-title">Harga Yang Sangat Terjangkau</h1>
+                    <p class="hero-text">Harga sewa lapangan kami sangat terjangkau. Ayo sewa lapangan disini.</p>
+                    <a href="{{ url('/gor') }}" class="vs-btn style4">Daftar Gor</a>
                     </div>
                 </div>
                 </div>
@@ -64,30 +62,20 @@
             <div class="col-xl-5">
             <div class="about-content">
                 <div class="title-area">
-                <span class="sec-subtitle">We are Travolo</span>
-                <h2 class="sec-title h1">We Are The Best For Your Travel </h2>
-                <p class="sec-text">Blienum nhaedrum torquatos nec eul, vis detraxit periculis ex, nihil is in mei. Xei an
-                    periculaeuripidis, fincartem ei est. Dlienum phaed is in mei. Lei an Hericulaeuripidis, hincartem ei
-                    est.</p>
+                <span class="sec-subtitle">We are Badminton Booker</span>
+                <h2 class="sec-title h1">Kami Adalah Yang Terbaik</h2>
+                <p class="sec-text">Situs kami menyediakan berbagai macam lapangan
+                    bulu tangkis. Sudah pasti terlengkap dan harga terjangkau.
+                    Kami akan mempermudah anda untuk menyewa lapangan.</p>
                 </div>
-                <ul class="about-list1">
-                <li>Mei an periculaeuripidis.</li>
-                <li>Lorem ipsum dolor sit am.</li>
-                <li>Blienum nhaedrum tortos.</li>
-                <li>Dlienum phaed is in meis.</li>
-                <li>torquatos nec euls vis.</li>
-                <li>peric uripidis, fincartem.</li>
-                <li>pericu laeuri pidis Mei sm.</li>
-                </ul>
-                <a href="about.html" class="vs-btn style4 ">View More</a>
             </div>
             </div>
             <div class="col-xl-6">
             <div class="img-box3">
-                <img class="img1" src="{{ asset('landing') }}/img/about/about-1-1.jpg" alt="about image">
+                <img class="img1" src="{{ asset('landing') }}/img/about/4.jpeg" alt="about image">
                 <div class="bottom-img">
-                <img class="img2" src="{{ asset('landing') }}/img/about/about-1-2.jpg" alt="about image">
-                <img class="img3" src="{{ asset('landing') }}/img/about/about-1-3.jpg" alt="about image">
+                <img class="img2" src="{{ asset('landing') }}/img/about/3.jpg" alt="about image">
+                <img class="img3" src="{{ asset('landing') }}/img/about/2.jpg" alt="about image">
                 </div>
             </div>
             </div>
@@ -96,74 +84,6 @@
     </section>
     <!--==============================
         About Area End
-    ==============================-->
-
-    <!--==============================
-        Features Area Start
-    ==============================-->
-    <section class="space-extra-bottom shape-mockup-wrap">
-        <div class="shape-mockup d-none d-xl-block ripple-animation z-index-negative" data-bottom="10%" data-right="13%">
-        <img src="{{ asset('landing') }}/img/shape/circle.png" alt="svg">
-        </div>
-        <div class="container">
-        <div class="row">
-            <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-            <div class="features-style1">
-                <div class="features-bg" data-bg-src="{{ asset('landing') }}/img/shape/features.png"></div>
-                <div class="features-image">
-                <img src="{{ asset('landing') }}/img/features/features-1-1.png" alt="image">
-                </div>
-                <div class="features-content">
-                <h3 class="features-title">Special Activities</h3>
-                <p class="features-text">Curabitur aliquet qugbfam isfbd dgui posuedfdre bladscfndit vivgbagmus Bitur
-                    aliquet</p>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-            <div class="features-style1">
-                <div class="features-bg" data-bg-src="{{ asset('landing') }}/img/shape/features.png"></div>
-                <div class="features-image">
-                <img src="{{ asset('landing') }}/img/features/features-1-2.png" alt="image">
-                </div>
-                <div class="features-content">
-                <h3 class="features-title">Popper Guideline</h3>
-                <p class="features-text">Curabitur aliquet qugbfam isfbd dgui posuedfdre bladscfndit vivgbagmus Bitur
-                    aliquet</p>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-            <div class="features-style1">
-                <div class="features-bg" data-bg-src="{{ asset('landing') }}/img/shape/features.png"></div>
-                <div class="features-image">
-                <img src="{{ asset('landing') }}/img/features/features-1-3.png" alt="image">
-                </div>
-                <div class="features-content">
-                <h3 class="features-title">Travel Arrangement </h3>
-                <p class="features-text">Curabitur aliquet qugbfam isfbd dgui posuedfdre bladscfndit vivgbagmus Bitur
-                    aliquet</p>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-            <div class="features-style1">
-                <div class="features-bg" data-bg-src="{{ asset('landing') }}/img/shape/features.png"></div>
-                <div class="features-image">
-                <img src="{{ asset('landing') }}/img/features/features-1-4.png" alt="image">
-                </div>
-                <div class="features-content">
-                <h3 class="features-title">Location Manager</h3>
-                <p class="features-text">Curabitur aliquet qugbfam isfbd dgui posuedfdre bladscfndit vivgbagmus Bitur
-                    aliquet</p>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
-    </section>
-    <!--==============================
-        Features Area End
     ==============================-->
 
     <!--==============================

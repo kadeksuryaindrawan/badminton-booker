@@ -98,7 +98,7 @@
                                     <img src="{{ asset('admin') }}/images/profile/pic1.jpg" width="20" alt="">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="app-profile.html" class="dropdown-item ai-icon">
+                                    <a href="{{ route('profile-admin',Auth::user()->id) }}" class="dropdown-item ai-icon">
                                         <svg id="icon-user2" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                         <span class="ms-2">Profile </span>
                                     </a>
@@ -140,7 +140,7 @@
 						</div>
 					</a>
 					<div class="dropdown-menu dropdown-menu-end">
-						<a href="app-profile.html" class="dropdown-item ai-icon ">
+						<a href="{{ route('profile-admin',Auth::user()->id) }}" class="dropdown-item ai-icon ">
 							<svg  xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
 							<span class="ms-2">Profile </span>
 						</a>
@@ -184,6 +184,20 @@
                             </a>
                         </li>
                     @endif
+
+                    <li class="{{ (request()->segment(1) == 'pemesanan') ? 'mm-active' : '' }}">
+                        <a href="{{ route('daftar-pemesanan') }}" class="" aria-expanded="false">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="nav-text">Pemesanan</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ (request()->segment(1) == 'laporan') ? 'mm-active' : '' }}">
+                        <a href="{{ route('daftar-all-laporan') }}" class="" aria-expanded="false">
+                            <i class="fas fa-file"></i>
+                            <span class="nav-text">Laporan</span>
+                        </a>
+                    </li>
                 </ul>
 			</div>
         </div>

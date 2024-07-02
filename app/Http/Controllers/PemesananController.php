@@ -24,7 +24,11 @@ class PemesananController extends Controller
         $carts = Cart::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         $total_cart = Cart::where('user_id', Auth::user()->id)->sum('total');
         $user = User::where('id', Auth::user()->id)->first();
-        return view('user.checkout', compact('carts', 'count_cart', 'total_cart', 'user'));
+        if($carts->isNotEmpty()){
+            return view('user.checkout', compact('carts', 'count_cart', 'total_cart', 'user'));
+        }else{
+            return back();
+        }
     }
 
     public function checkout_process(Request $request)
@@ -116,10 +120,86 @@ class PemesananController extends Controller
 
             Cart::where('user_id', Auth::user()->id)->delete();
 
-            return redirect()->back()->with('success', 'Sukses checkout! Silahkan menunggu konfirmasi admin!');
+            return redirect()->route('histori-transaksi')->with('success', 'Sukses checkout! Silahkan menunggu konfirmasi admin!');
 
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    public function daftar_pemesanan()
+    {
+        if(Auth::user()->role == 'super admin'){
+            $pemesanans = Pemesanan::orderBy('created_at', 'desc')->get();
+        }else{
+            $pemesanans = Pemesanan::where('admin_id',Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        }
+        return view('admin.pemesanan.index',compact('pemesanans'));
+    }
+
+    public function detail_pemesanan($id)
+    {
+        $pemesanan = Pemesanan::find($id);
+        if($pemesanan->admin_id != Auth::user()->id){
+            return back();
+        }
+        $detail_orders = DetailOrder::where('pemesanan_id',$id)->orderBy('created_at','desc')->get();
+        return view('admin.pemesanan.detail', compact('pemesanan','detail_orders'));
+    }
+
+    public function pay_accept($id)
+    {
+        $pemesanan = Pemesanan::find($id);
+        if ($pemesanan->admin_id != Auth::user()->id) {
+            return back();
+        }
+        try {
+            Pemesanan::where('id', $id)->update([
+                'transaction_status' => 'terbayar',
+            ]);
+
+            return redirect()->route('daftar-pemesanan')->with('success', 'Berhasil terima pembayaran!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function pay_reject(Request $request, $id)
+    {
+        $pemesanan = Pemesanan::find($id);
+        if ($pemesanan->admin_id != Auth::user()->id) {
+            return back();
+        }
+        $validator = Validator::make($request->all(), [
+            'keterangan' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('detail-pemesanan', $id)->withErrors($validator)->withInput();
+        }
+        try {
+            $keterangan = $request->keterangan;
+
+            Pemesanan::where('id', $id)->update([
+                'keterangan' => $keterangan,
+                'transaction_status' => 'pembayaran ditolak',
+            ]);
+
+            return redirect()->route('daftar-pemesanan')->with('success', 'Berhasil tolak pembayaran!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function pemesanan_delete($id)
+    {
+        $pemesanan = Pemesanan::find($id);
+        if ($pemesanan->admin_id != Auth::user()->id) {
+            return back();
+        }
+        DetailOrder::where('pemesanan_id', $id)->delete();
+        unlink(storage_path('app/public/bukti_bayar/' . $pemesanan->bukti_bayar));
+        $pemesanan->delete();
+        return redirect()->back()->with('success', 'Order berhasil dihapus!');
     }
 }

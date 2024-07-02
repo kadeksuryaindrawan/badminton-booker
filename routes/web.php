@@ -5,7 +5,9 @@ use App\Http\Controllers\GorController;
 use App\Http\Controllers\JadwalLapanganController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LapanganController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,10 +35,27 @@ Route::post('/add-cart', [CartController::class, 'add'])->name('add-cart')->midd
 Route::delete('/delete-cart/{id}', [CartController::class, 'delete'])->name('delete-cart')->middleware('auth');
 Route::get('/checkout', [PemesananController::class, 'index'])->name('checkout')->middleware('auth');
 Route::post('/checkout-process', [PemesananController::class, 'checkout_process'])->name('checkout-process')->middleware('auth');
-// Route::group(['middleware' => ['auth', 'role2:super admin,admin']], function () {
-//     Route::resource('user', UserController::class);
-//     Route::resource('gor', GorController::class);
-// });
+Route::get('/histori-transaksi', [LandingController::class, 'histori_transaksi'])->name('histori-transaksi')->middleware('auth');
+Route::get('/detail-histori/{id}', [LandingController::class, 'detail_histori'])->name('detail-histori')->middleware('auth');
+Route::get('/profile/{id}', [ProfileController::class, 'profile_user'])->name('profile-user')->middleware('auth');
+Route::put('/profile-edit/{id}', [ProfileController::class, 'edit'])->name('profile-edit')->middleware('auth');
+
+Route::group(['middleware' => ['auth', 'role2:super admin,admin']], function () {
+    Route::get('/pemesanan/all', [PemesananController::class, 'daftar_pemesanan'])->name('daftar-pemesanan');
+    Route::get('/pemesanan/detail/{id}', [PemesananController::class, 'detail_pemesanan'])->name('detail-pemesanan');
+    Route::get('/pay-accept/{id}', [PemesananController::class, 'pay_accept'])->name('pay-accept');
+    Route::put('/pay-reject/{id}', [PemesananController::class, 'pay_reject'])->name('pay-reject');
+    Route::delete('/pemesanan-delete/{id}', [PemesananController::class, 'pemesanan_delete'])->name('pemesanan-delete');
+
+    Route::get('/laporan/all', [LaporanController::class, 'daftar_all_laporan'])->name('daftar-all-laporan');
+    Route::get('/export-all-pdf', [LaporanController::class, 'export_all_pdf'])->name('export-all-pdf');
+    Route::get('/export-all-excel', [LaporanController::class, 'export_all_excel'])->name('export-all-excel');
+
+    Route::get('/laporan/filter', [LaporanController::class, 'daftar_filter_laporan'])->name('filter-laporan');
+    Route::get('/export-filter-pdf', [LaporanController::class, 'export_filter_pdf'])->name('export-filter-pdf');
+    Route::get('/export-filter-excel', [LaporanController::class, 'export_filter_excel'])->name('export-filter-excel');
+    Route::get('/home/profile/{id}', [ProfileController::class, 'profile_admin'])->name('profile-admin');
+});
 
 Route::group(['middleware' => ['auth', 'role:super admin']], function () {
     Route::resource('user', UserController::class);

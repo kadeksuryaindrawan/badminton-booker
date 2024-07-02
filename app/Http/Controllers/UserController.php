@@ -100,53 +100,49 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         if ($user->email == $request->email) {
-            $validator = Validator::make($request->all(), [
+            $rules = [
                 'nama' => ['required', 'string', 'max:255'],
                 'alamat' => ['required'],
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'no_hp' => ['required'],
                 'jenis_kelamin' => ['required'],
                 'role' => ['required'],
-            ]);
+            ];
         } else {
-            $validator = Validator::make($request->all(), [
+            $rules = [
                 'nama' => ['required', 'string', 'max:255'],
                 'alamat' => ['required'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'no_hp' => ['required'],
                 'jenis_kelamin' => ['required'],
                 'role' => ['required'],
-            ]);
+            ];
         }
+
+        if ($request->filled('password')) {
+            $rules['password'] = ['required', 'string', 'min:8', 'confirmed'];
+        }
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()->route('user.edit', ['user' => $user->id])->withErrors($validator)->withInput();
         }
         try {
-            if ($request->password == NULL) {
-                $user->update([
-                    'nama' => $request->nama,
-                    'email' => $request->email,
-                    'alamat' => $request->alamat,
-                    'no_hp' => $request->no_hp,
-                    'jenis_kelamin' => $request->jenis_kelamin,
-                    'role' => $request->role,
-                ]);
-            } else {
-                Validator::make($request->all(), [
-                    'password' => ['required', 'string', 'min:8', 'confirmed'],
-                    'role' => ['required']
-                ]);
-                $user->update([
-                    'nama' => $request->nama,
-                    'email' => $request->email,
-                    'alamat' => $request->alamat,
-                    'no_hp' => $request->no_hp,
-                    'password' => Hash::make($request->password),
-                    'jenis_kelamin' => $request->jenis_kelamin,
-                    'role' => $request->role,
-                ]);
+            $data = [
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'role' => $request->role,
+            ];
+
+            if ($request->filled('password')) {
+                $data['password'] = Hash::make($request->password);
             }
+
+            $user->update($data);
             return redirect()->route('user.index')->with('success', 'Berhasil edit user!');
         } catch (\Throwable $th) {
             throw $th;
