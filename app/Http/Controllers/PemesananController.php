@@ -140,8 +140,10 @@ class PemesananController extends Controller
     public function detail_pemesanan($id)
     {
         $pemesanan = Pemesanan::find($id);
-        if($pemesanan->admin_id != Auth::user()->id){
-            return back();
+        if (Auth::user()->role != 'super admin') {
+            if ($pemesanan->admin_id != Auth::user()->id) {
+                return back();
+            }
         }
         $detail_orders = DetailOrder::where('pemesanan_id',$id)->orderBy('created_at','desc')->get();
         return view('admin.pemesanan.detail', compact('pemesanan','detail_orders'));
@@ -150,8 +152,10 @@ class PemesananController extends Controller
     public function pay_accept($id)
     {
         $pemesanan = Pemesanan::find($id);
-        if ($pemesanan->admin_id != Auth::user()->id) {
-            return back();
+        if (Auth::user()->role != 'super admin') {
+            if ($pemesanan->admin_id != Auth::user()->id) {
+                return back();
+            }
         }
         try {
             Pemesanan::where('id', $id)->update([
@@ -167,8 +171,10 @@ class PemesananController extends Controller
     public function pay_reject(Request $request, $id)
     {
         $pemesanan = Pemesanan::find($id);
-        if ($pemesanan->admin_id != Auth::user()->id) {
-            return back();
+        if (Auth::user()->role != 'super admin') {
+            if ($pemesanan->admin_id != Auth::user()->id) {
+                return back();
+            }
         }
         $validator = Validator::make($request->all(), [
             'keterangan' => ['required', 'string'],
@@ -194,8 +200,10 @@ class PemesananController extends Controller
     public function pemesanan_delete($id)
     {
         $pemesanan = Pemesanan::find($id);
-        if ($pemesanan->admin_id != Auth::user()->id) {
-            return back();
+        if (Auth::user()->role != 'super admin') {
+            if ($pemesanan->admin_id != Auth::user()->id) {
+                return back();
+            }
         }
         DetailOrder::where('pemesanan_id', $id)->delete();
         unlink(storage_path('app/public/bukti_bayar/' . $pemesanan->bukti_bayar));
