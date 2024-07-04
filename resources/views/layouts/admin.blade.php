@@ -171,7 +171,7 @@
                         <li class="{{ (request()->segment(1) == 'gor') ? 'mm-active' : '' }}">
                             <a href="{{ route('gor.index') }}" class="" aria-expanded="false">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span class="nav-text">gor</span>
+                                <span class="nav-text">Gor</span>
                             </a>
                         </li>
                     @endif

@@ -134,6 +134,7 @@
                 <div class="card-body">
                     <strong><h5 class="text-danger">Silahkan lakukan transfer ke rekening BCA 87873287 an Walter Andrian atau BRI 8787234 an Walter Andrian, sebesar Rp.{{ number_format($total_cart,0,",",".") }}</h5></strong>
                     <p>*Setelah melakukan transfer, silahkan lengkapi form dibawah dan isi data diri anda serta upload bukti transfer berupa foto(jpg,jpeg,png)!*</p>
+                    <p>*Jika anda sudah klik tombol checkout, maka proses pemesanan tidak bisa dibatalkan dengan alasan apapun! Terimakasih *</p>
                 </div>
             </div>
             <label for="">Nama Bank Pelanggan*</label>
@@ -149,7 +150,7 @@
             <input type="file" name="bukti_bayar" class="form-control" required>
 
             <div class="form-row place-order pt-lg-2">
-                <button onclick="return confirm('Yakin checkout? Pastikan data dan pesanan anda sudah benar!')" type="submit" class="vs-btn style4">Checkout</button>
+                <button onclick="return confirm('Yakin checkout? Pastikan data dan pesanan anda sudah benar! Jika anda sudah klik tombol checkout pemesanan tidak bisa dibatalkan!')" type="submit" class="vs-btn style4">Checkout</button>
             </div>
             </div>
         </form>
