@@ -9,6 +9,7 @@ use App\Models\Pemesanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PemesananController extends Controller
@@ -49,6 +50,11 @@ class PemesananController extends Controller
             $carts = Cart::orderBy('created_at', 'desc')->where('user_id', Auth::user()->id)->get();
 
             $ordered = DetailOrder::all();
+            $ordered = DB::table('detail_orders')
+            ->join('pemesanans', 'detail_orders.pemesanan_id', '=', 'pemesanans.id')
+            ->where('pemesanans.transaction_status', '!=', 'pembayaran ditolak')
+            ->select('detail_orders.*')
+            ->get();
 
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $charactersLength = strlen($characters);

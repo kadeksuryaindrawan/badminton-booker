@@ -10,6 +10,7 @@ use App\Models\Lapangan;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LandingController extends Controller
 {
@@ -78,7 +79,13 @@ class LandingController extends Controller
 
         $lapangan_id = $request->lapanganId;
 
-        $ordered = DetailOrder::where('tanggal', $tanggal)->where('lapangan_id',$lapangan_id)->get();
+        $ordered = DB::table('detail_orders')
+        ->join('pemesanans', 'detail_orders.pemesanan_id', '=', 'pemesanans.id')
+        ->where('detail_orders.tanggal', $tanggal)
+        ->where('detail_orders.lapangan_id', $lapangan_id)
+        ->where('pemesanans.transaction_status', '!=', 'pembayaran ditolak')
+        ->select('detail_orders.jadwal')
+        ->get();
 
         $jadwals = JadwalLapangan::where('lapangan_id',$lapangan_id)->orderBy('jadwal','asc')->get();
 
