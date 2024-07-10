@@ -19,7 +19,7 @@ class UpdatePendingTransactions
     public function handle(Request $request, Closure $next)
     {
         // Ambil waktu sekarang dan kurangi 30 menit
-        $thresholdTime = Carbon::now()->subMinutes(3);
+        $thresholdTime = Carbon::now()->subMinutes(30);
 
         // Perbarui transaksi yang melebihi batas waktu pembayaran
         DB::table('pemesanans')
