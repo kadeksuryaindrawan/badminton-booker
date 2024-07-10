@@ -34,6 +34,7 @@
                                                 <th>Foto</th>
                                                 <th>Nama Gor</th>
                                                 <th>Alamat</th>
+                                                <th>Link Maps</th>
                                                 <th>Admin</th>
                                                 <th>Action</th>
                                             </tr>
@@ -52,6 +53,7 @@
                                                     </td>
                                                     <td>{{ ucwords($gor->nama_gor) }}</td>
                                                     <td>{{ ucfirst($gor->alamat) }}</td>
+                                                    <td><a target="__BLANK" href="{{ $gor->link_maps }}"><button class="btn btn-primary">Lihat Link</button></a></td>
                                                     <td>{{ ucwords($gor->admin->nama) }}</td>
                                                     <td>
                                                         <div class="dropdown">

@@ -50,6 +50,7 @@ class GorController extends Controller
             'admin_id' => ['required'],
             'nama_gor' => ['required', 'string', 'max:255'],
             'alamat' => ['required'],
+            'link_maps' => ['required'],
             'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
         ]);
 
@@ -64,6 +65,7 @@ class GorController extends Controller
                     "admin_id" => $request->admin_id,
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
+                    "link_maps" => $request->link_maps,
                     "foto" => $file,
                 ]);
 
@@ -72,6 +74,7 @@ class GorController extends Controller
                     "admin_id" => $request->admin_id,
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
+                    "link_maps" => $request->link_maps,
                     "foto" => '',
                 ]);
             }
@@ -130,6 +133,7 @@ class GorController extends Controller
                 'admin_id' => ['required'],
                 'nama_gor' => ['required', 'string', 'max:255'],
                 'alamat' => ['required'],
+                'link_maps' => ['required'],
                 'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
             ]);
         } else {
@@ -137,6 +141,7 @@ class GorController extends Controller
                 'admin_id' => ['required'],
                 'nama_gor' => ['required', 'string', 'max:255'],
                 'alamat' => ['required'],
+                'link_maps' => ['required'],
             ]);
         }
 
@@ -153,6 +158,7 @@ class GorController extends Controller
                     "admin_id" => $request->admin_id,
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
+                    "link_maps" => $request->link_maps,
                     "foto" => $file,
                 ]);
             } else {
@@ -160,6 +166,7 @@ class GorController extends Controller
                     "admin_id" => $request->admin_id,
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
+                    "link_maps" => $request->link_maps,
                 ]);
             }
 

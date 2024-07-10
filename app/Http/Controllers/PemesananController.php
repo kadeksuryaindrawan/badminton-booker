@@ -36,10 +36,6 @@ class PemesananController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => ['required'],
-            'nama_bank' => ['required', 'string', 'max:255'],
-            'no_bank' => ['required', 'numeric'],
-            'pemilik_bank' => ['required', 'string', 'max:255'],
-            'bukti_bayar' => ['required', 'file', 'mimes:jpg,jpeg,png'],
         ]);
 
         if ($validator->fails()) {
@@ -84,35 +80,13 @@ class PemesananController extends Controller
 
                 return redirect()->back()->with('error', 'Gagal checkout! Lapangan berikut sudah dibooking: ' . $lapanganDetailsString . ' di tanggal dan jadwal yang sama. Silahkan ubah pesanan Anda di cart!');
             }
-            if ($request->hasFile('bukti_bayar')) {
-                $file = md5(time()) . '_Bukti_Bayar_'. $transaction_id . '_' . $request->file('bukti_bayar')->getClientOriginalName();
-                $path = $request->file('bukti_bayar')->storeAs('public/bukti_bayar', $file);
                 $pemesanan = Pemesanan::create([
                     "user_id" => Auth::user()->id,
                     "admin_id" => $cart->admin_id,
                     "transaction_id" => $transaction_id,
                     "total" => $request->total,
-                    "transaction_status" => 'menunggu konfirmasi',
-                    "nama_bank" => $request->nama_bank,
-                    "no_bank" => $request->no_bank,
-                    "pemilik_bank" => $request->pemilik_bank,
-                    "bukti_bayar" => $file,
-                    "tanggal_bayar" => now(),
+                    "transaction_status" => 'menunggu pembayaran',
                 ]);
-            } else {
-                $pemesanan = Pemesanan::create([
-                    "user_id" => Auth::user()->id,
-                    "admin_id" => $cart->admin_id,
-                    "transaction_id" => $transaction_id,
-                    "total" => $request->total,
-                    "transaction_status" => 'menunggu konfirmasi',
-                    "nama_bank" => $request->nama_bank,
-                    "no_bank" => $request->no_bank,
-                    "pemilik_bank" => $request->pemilik_bank,
-                    "bukti_bayar" => '',
-                    "tanggal_bayar" => now(),
-                ]);
-            }
 
             foreach ($carts as $cart) {
                 DetailOrder::create([
@@ -126,7 +100,7 @@ class PemesananController extends Controller
 
             Cart::where('user_id', Auth::user()->id)->delete();
 
-            return redirect()->route('histori-transaksi')->with('success', 'Sukses checkout! Silahkan menunggu konfirmasi admin!');
+            return redirect()->route('histori-transaksi')->with('success', 'Sukses checkout! Silahkan melakukan pembayaran di menu bayar pada halaman histori transaksi!');
 
         } catch (\Throwable $th) {
             throw $th;
@@ -153,6 +127,60 @@ class PemesananController extends Controller
         }
         $detail_orders = DetailOrder::where('pemesanan_id',$id)->orderBy('created_at','desc')->get();
         return view('admin.pemesanan.detail', compact('pemesanan','detail_orders'));
+    }
+
+    public function pay($id)
+    {
+        if (Auth::check() == true) {
+            $count_cart = Cart::where('user_id', Auth::user()->id)->count();
+        } else {
+            $count_cart = 0;
+        }
+        $pemesanan = Pemesanan::where('id', $id)->first();
+        $carts = Cart::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $total_cart = Cart::where('user_id', Auth::user()->id)->sum('total');
+        $user = User::where('id', Auth::user()->id)->first();
+        if ($pemesanan->transaction_status == 'menunggu pembayaran' && $pemesanan->user_id == Auth::user()->id) {
+            return view('user.bayar', compact('carts', 'count_cart', 'total_cart', 'pemesanan'));
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function pay_process(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_bank' => ['required', 'string', 'max:255'],
+            'no_bank' => ['required', 'numeric'],
+            'pemilik_bank' => ['required', 'string', 'max:255'],
+            'bukti_bayar' => ['required', 'file', 'mimes:jpg,jpeg,png'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('bayar-process', $id)->withErrors($validator)->withInput();
+        }
+        try {
+            $pemesanan = Pemesanan::find($id);
+            $file = md5(time()) . '_Bukti_Bayar_' . $pemesanan->transaction_id . '_' . $request->file('bukti_bayar')->getClientOriginalName();
+            $path = $request->file('bukti_bayar')->storeAs('public/bukti_bayar', $file);
+            if($pemesanan->transaction_status == 'menunggu pembayaran'){
+                $pemesanan = Pemesanan::where('id', $id)->update([
+                    "transaction_status" => 'menunggu konfirmasi',
+                    "nama_bank" => $request->nama_bank,
+                    "no_bank" => $request->no_bank,
+                    "pemilik_bank" => $request->pemilik_bank,
+                    "bukti_bayar" => $file,
+                    "tanggal_bayar" => now(),
+                ]);
+
+                return redirect()->route('histori-transaksi')->with('success', 'Pembayaran berhasil! Silahkan menunggu konfirmasi admin!');
+            }else{
+                return redirect()->route('histori-transaksi')->with('error', 'Pembayaran gagal! Pembayaran melebihi batas waktu yang ditentukan!');
+            }
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function pay_accept($id)

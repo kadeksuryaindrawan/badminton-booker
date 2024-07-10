@@ -47,15 +47,18 @@
                                                     {{ $pemesanan->keterangan }}
                                                 @endif
                                             </p>
-                                            <p>Nama Bank Pelanggan : {{ $pemesanan->nama_bank }}</p>
-                                            <p>No Rekening Pelanggan : {{ $pemesanan->no_bank }}</p>
-                                            <p>Pemilik Rekening : {{ $pemesanan->pemilik_bank }}</p>
-                                            <p>Tanggal Transfer : {{ date("d M Y",strtotime($pemesanan->tanggal_bayar)) }}</p>
-                                            <p>Bukti Transfer :
-                                                <a class="example-image-link" href="{{ asset('storage/bukti_bayar/'.$pemesanan->bukti_bayar) }}" data-lightbox="example-1">
-                                                    <img style="width: 100px; height: 80px; object-fit:cover;" src="{{ asset('storage/bukti_bayar/'.$pemesanan->bukti_bayar) }}" alt="">
-                                                </a>
-                                            </p>
+                                            @if ($pemesanan->transaction_status == 'menunggu konfirmasi' || $pemesanan->transaction_status == 'terbayar' || $pemesanan->transaction_status == 'pembayaran ditolak')
+                                                <p>Nama Bank Pelanggan : {{ $pemesanan->nama_bank }}</p>
+                                                <p>No Rekening Pelanggan : {{ $pemesanan->no_bank }}</p>
+                                                <p>Pemilik Rekening : {{ $pemesanan->pemilik_bank }}</p>
+                                                <p>Tanggal Transfer : {{ date("d M Y",strtotime($pemesanan->tanggal_bayar)) }}</p>
+                                                <p>Bukti Transfer :
+                                                    <a class="example-image-link" href="{{ asset('storage/bukti_bayar/'.$pemesanan->bukti_bayar) }}" data-lightbox="example-1">
+                                                        <img style="width: 100px; height: 80px; object-fit:cover;" src="{{ asset('storage/bukti_bayar/'.$pemesanan->bukti_bayar) }}" alt="">
+                                                    </a>
+                                                </p>
+                                            @endif
+
                                         </div>
                                         <div class="col-lg-8">
                                             <h5 class="card-title">Data Lapangan</h5>

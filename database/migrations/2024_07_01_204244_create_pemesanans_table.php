@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('admin_id');
             $table->string('transaction_id');
             $table->double('total');
-            $table->enum('transaction_status', ['menunggu pembayaran','menunggu konfirmasi', 'terbayar', 'pembayaran ditolak']);
+            $table->enum('transaction_status', ['menunggu pembayaran','menunggu konfirmasi', 'terbayar', 'pembayaran ditolak', 'dibatalkan']);
             $table->string('nama_bank')->nullable();
             $table->string('no_bank')->nullable();
             $table->string('pemilik_bank')->nullable();

@@ -39,6 +39,9 @@ Route::get('/histori-transaksi', [LandingController::class, 'histori_transaksi']
 Route::get('/detail-histori/{id}', [LandingController::class, 'detail_histori'])->name('detail-histori')->middleware('auth');
 Route::get('/profile/{id}', [ProfileController::class, 'profile_user'])->name('profile-user')->middleware('auth');
 Route::put('/profile-edit/{id}', [ProfileController::class, 'edit'])->name('profile-edit')->middleware('auth');
+Route::get('/bayar/{id}', [PemesananController::class, 'pay'])->name('bayar')->middleware('auth');
+Route::put('/bayar-process/{id}', [PemesananController::class, 'pay_process'])->name('bayar-process')->middleware('auth');
+Route::get('/cetak-kwitansi/{id}', [LandingController::class, 'cetak_kwitansi'])->name('cetak-kwitansi')->middleware('auth');
 
 Route::group(['middleware' => ['auth', 'role2:super admin,admin']], function () {
     Route::get('/pemesanan/all', [PemesananController::class, 'daftar_pemesanan'])->name('daftar-pemesanan');

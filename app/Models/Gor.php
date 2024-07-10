@@ -13,6 +13,7 @@ class Gor extends Model
         'admin_id',
         'nama_gor',
         'alamat',
+        'link_maps',
         'foto'
     ];
 

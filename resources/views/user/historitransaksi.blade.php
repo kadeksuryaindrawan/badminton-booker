@@ -77,7 +77,11 @@
                             </td>
 
                             <td data-title="jadwal">
-                                <a target="__BLANK" href="{{ asset('storage/bukti_bayar/'.$pemesanan->bukti_bayar) }}"><button class="btn btn-secondary">Lihat Bukti Bayar</button></a>
+                                @if ($pemesanan->transaction_status != 'menunggu pembayaran')
+                                    <a target="__BLANK" href="{{ asset('storage/bukti_bayar/'.$pemesanan->bukti_bayar) }}"><button class="btn btn-secondary">Lihat Bukti Bayar</button></a>
+                                @else
+                                    -
+                                @endif
                             </td>
                             <td data-title="Total">
                             <span class="amount">Rp. {{ number_format($pemesanan->total,0,",",".") }}</span>
@@ -91,6 +95,12 @@
                             </td>
                             <td data-title="Remove">
                                 <a href="{{ route('detail-histori',$pemesanan->id) }}"><button class="btn btn-primary">Detail</button></a>
+                                @if ($pemesanan->transaction_status == 'menunggu pembayaran')
+                                    <a href="{{ route('bayar',$pemesanan->id) }}"><button class="btn btn-warning">Bayar</button></a>
+                                @endif
+                                @if ($pemesanan->transaction_status == 'terbayar')
+                                    <a href="{{ route('cetak-kwitansi',$pemesanan->id) }}"><button class="btn btn-success">Unduh Kwitansi</button></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

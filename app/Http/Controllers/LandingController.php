@@ -11,6 +11,7 @@ use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class LandingController extends Controller
 {
@@ -128,5 +129,25 @@ class LandingController extends Controller
         $pemesanan = Pemesanan::find($id);
         $total = $pemesanan->total;
         return view('user.detailhistori', compact('detail_orders', 'pemesanan', 'total', 'count_cart'));
+    }
+
+    public function cetak_kwitansi($id)
+    {
+        $detail_orders = DetailOrder::where('pemesanan_id', $id)->orderBy('created_at', 'desc')->get();
+        $pemesanan = Pemesanan::find($id);
+        $total = $pemesanan->total;
+
+        $pdfOptions = [
+            'isRemoteEnabled' => true,
+        ];
+
+        $pdf = PDF::loadView('user.kwitansi', [
+            'detail_orders' => $detail_orders,
+            'pemesanan' =>  $pemesanan,
+            'total' => $total,
+        ], $pdfOptions)
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('kwitansi-' . $pemesanan->transaction_id .'.pdf');
     }
 }

@@ -42,6 +42,13 @@
                                             @enderror
                                         </div>
                                         <div class="col-sm-12 mb-3">
+                                            <label class="form-label">Link Maps</label>
+                                            <input type="text" class="form-control" name="link_maps" placeholder="Masukkan Link Google Maps" value="{{ old('link_maps') }}" required>
+                                            @error('link_maps')
+                                                <p class="text-danger text-sm">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-12 mb-3">
                                             <label class="form-label">Foto</label>
                                             <input type="file" class="form-control" name="foto" value="{{ old('foto') }}" required>
                                             @error('foto')

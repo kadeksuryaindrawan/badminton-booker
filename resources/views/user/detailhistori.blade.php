@@ -65,10 +65,18 @@
                     </p>
                 </div>
                 <div class="">
-                    <p>Nama Bank Pelanggan : {{ $pemesanan->nama_bank }}</p>
-                    <p>No Rekening Pelanggan : {{ $pemesanan->no_bank }}</p>
-                    <p>Pemilik Rekening : {{ $pemesanan->pemilik_bank }}</p>
-                    <p>Tanggal Transfer : {{ date("d M Y",strtotime($pemesanan->tanggal_bayar)) }}</p>
+                    @if ($pemesanan->nama_bank == null)
+                        <p>Nama Bank Pelanggan : -</p>
+                        <p>No Rekening Pelanggan : -</p>
+                        <p>Pemilik Rekening : -</p>
+                        <p>Tanggal Transfer : -</p>
+                    @else
+                        <p>Nama Bank Pelanggan : {{ $pemesanan->nama_bank }}</p>
+                        <p>No Rekening Pelanggan : {{ $pemesanan->no_bank }}</p>
+                        <p>Pemilik Rekening : {{ $pemesanan->pemilik_bank }}</p>
+                        <p>Tanggal Transfer : {{ date("d M Y H:i:s",strtotime($pemesanan->tanggal_bayar)) }}</p>
+                    @endif
+
                 </div>
             </div>
             <div class="table-responsive">
