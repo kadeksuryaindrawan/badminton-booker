@@ -84,7 +84,7 @@ class LandingController extends Controller
         ->join('pemesanans', 'detail_orders.pemesanan_id', '=', 'pemesanans.id')
         ->where('detail_orders.tanggal', $tanggal)
         ->where('detail_orders.lapangan_id', $lapangan_id)
-        ->where('pemesanans.transaction_status', '!=', 'pembayaran ditolak')
+        ->whereNotIn('pemesanans.transaction_status', ['pembayaran ditolak', 'dibatalkan'])
         ->select('detail_orders.jadwal')
         ->get();
 

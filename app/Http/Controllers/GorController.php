@@ -51,6 +51,8 @@ class GorController extends Controller
             'nama_gor' => ['required', 'string', 'max:255'],
             'alamat' => ['required'],
             'link_maps' => ['required'],
+            'jam_buka' => ['required', 'string', 'max:255'],
+            'jam_tutup' => ['required', 'string', 'max:255'],
             'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
         ]);
 
@@ -66,6 +68,8 @@ class GorController extends Controller
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
                     "link_maps" => $request->link_maps,
+                    "jam_buka" => $request->jam_buka,
+                    "jam_tutup" => $request->jam_tutup,
                     "foto" => $file,
                 ]);
 
@@ -75,6 +79,8 @@ class GorController extends Controller
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
                     "link_maps" => $request->link_maps,
+                    "jam_buka" => $request->jam_buka,
+                    "jam_tutup" => $request->jam_tutup,
                     "foto" => '',
                 ]);
             }
@@ -134,6 +140,8 @@ class GorController extends Controller
                 'nama_gor' => ['required', 'string', 'max:255'],
                 'alamat' => ['required'],
                 'link_maps' => ['required'],
+                'jam_buka' => ['required', 'string', 'max:255'],
+                'jam_tutup' => ['required', 'string', 'max:255'],
                 'foto' => ['required', 'file', 'mimes:jpg,jpeg,png'],
             ]);
         } else {
@@ -142,6 +150,8 @@ class GorController extends Controller
                 'nama_gor' => ['required', 'string', 'max:255'],
                 'alamat' => ['required'],
                 'link_maps' => ['required'],
+                'jam_buka' => ['required', 'string', 'max:255'],
+                'jam_tutup' => ['required', 'string', 'max:255'],
             ]);
         }
 
@@ -159,6 +169,8 @@ class GorController extends Controller
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
                     "link_maps" => $request->link_maps,
+                    "jam_buka" => $request->jam_buka,
+                    "jam_tutup" => $request->jam_tutup,
                     "foto" => $file,
                 ]);
             } else {
@@ -167,6 +179,8 @@ class GorController extends Controller
                     "nama_gor" => $request->nama_gor,
                     "alamat" => $request->alamat,
                     "link_maps" => $request->link_maps,
+                    "jam_buka" => $request->jam_buka,
+                    "jam_tutup" => $request->jam_tutup,
                 ]);
             }
 

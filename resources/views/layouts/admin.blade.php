@@ -63,7 +63,7 @@
         <div class="nav-header">
             <a href="{{ url('/') }}" class="brand-logo mx-2 text-center">
 
-                <p class="text-primary" style="font-size: 13px; font-weight: 800; letter-spacing: 1px;">BADMMINTON BOOKER</p>
+                <p class="text-primary" style="font-size: 13px; font-weight: 800; letter-spacing: 1px;">BADMINTON BOOKER</p>
 
             </a>
             <div class="nav-control">

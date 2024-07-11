@@ -14,6 +14,8 @@ class Gor extends Model
         'nama_gor',
         'alamat',
         'link_maps',
+        'jam_buka',
+        'jam_tutup',
         'foto'
     ];
 

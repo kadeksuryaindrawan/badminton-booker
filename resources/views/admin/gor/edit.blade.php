@@ -50,6 +50,20 @@
                                             @enderror
                                         </div>
                                         <div class="col-sm-12 mb-3">
+                                            <label class="form-label">Jam Buka</label>
+                                            <input type="text" class="form-control" name="jam_buka" placeholder="Example: 08.00" value="{{ $gor->jam_buka }}" required>
+                                            @error('jam_buka')
+                                                <p class="text-danger text-sm">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-12 mb-3">
+                                            <label class="form-label">Jam Tutup</label>
+                                            <input type="text" class="form-control" name="jam_tutup" placeholder="Example: 17.00" value="{{ $gor->jam_tutup }}" required>
+                                            @error('jam_tutup')
+                                                <p class="text-danger text-sm">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-12 mb-3">
                                             <label class="form-label">Foto</label>
                                             <input type="file" class="form-control" name="foto">
                                             @error('foto')

@@ -48,7 +48,7 @@ class PemesananController extends Controller
             $ordered = DetailOrder::all();
             $ordered = DB::table('detail_orders')
             ->join('pemesanans', 'detail_orders.pemesanan_id', '=', 'pemesanans.id')
-            ->where('pemesanans.transaction_status', '!=', 'pembayaran ditolak')
+            ->whereNotIn('pemesanans.transaction_status', ['pembayaran ditolak', 'dibatalkan'])
             ->select('detail_orders.*')
             ->get();
 

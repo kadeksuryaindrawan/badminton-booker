@@ -34,6 +34,8 @@
                 <h3>Daftar Lapangan Di {{ ucwords($gor->nama_gor) }}</h3>
                 <a target="__BLANK" href="{{ $gor->link_maps }}"><button class="btn btn-primary">Lihat Lokasi Gor Di Maps</button></a>
                 <p class="mt-2">No WA : {{ $gor->admin->no_hp }}</p>
+                <p class="mt-2">Jam Buka : {{ $gor->jam_buka }}</p>
+                <p class="mt-2">Jam Tutup : {{ $gor->jam_tutup }}</p>
             </div>
             <div class="row">
                 @foreach ($lapangans as $lapangan)

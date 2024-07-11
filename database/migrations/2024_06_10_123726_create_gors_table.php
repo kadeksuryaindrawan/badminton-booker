@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('nama_gor');
             $table->text('alamat');
             $table->text('link_maps');
+            $table->string('jam_buka');
+            $table->string('jam_tutup');
             $table->text('foto');
             $table->timestamps();
         });
