@@ -16,7 +16,7 @@
                     <span class="hero-subtitle">Ayo Hidup Sehat</span>
                     <h1 class="hero-title">Booking Lapangan Anda Sekarang</h1>
                     <p class="hero-text">Kami Menyediakan Berbagai Gor Dan Lapangan Bulu Tangkis Untuk Anda.</p>
-                    <a href="{{ url('/gor') }}" class="vs-btn style4">Daftar Gor</a>
+                    <a href="{{ url('/daftar-gor') }}" class="vs-btn style4">Daftar Gor</a>
                     </div>
                 </div>
                 </div>
@@ -30,7 +30,7 @@
                     <span class="hero-subtitle">Ayo Hidup Sehat</span>
                     <h1 class="hero-title">Harga Yang Sangat Terjangkau</h1>
                     <p class="hero-text">Harga sewa lapangan kami sangat terjangkau. Ayo sewa lapangan disini.</p>
-                    <a href="{{ url('/gor') }}" class="vs-btn style4">Daftar Gor</a>
+                    <a href="{{ url('/daftar-gor') }}" class="vs-btn style4">Daftar Gor</a>
                     </div>
                 </div>
                 </div>
