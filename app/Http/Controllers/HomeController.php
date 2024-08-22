@@ -30,6 +30,9 @@ class HomeController extends Controller
             return view('admin.dashboard.index');
         }
         else{
+            if (Auth::user()->role == 'user' && !Auth::user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
             if (Auth::check() == true) {
                 $count_cart = Cart::where('user_id', Auth::user()->id)->count();
             } else {

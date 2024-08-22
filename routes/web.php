@@ -75,6 +75,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::delete('/hapus-jadwal/{id}', [JadwalLapanganController::class, 'hapus'])->name('hapus-jadwal');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

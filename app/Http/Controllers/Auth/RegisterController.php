@@ -66,7 +66,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'nama' => $data['nama'],
             'alamat' => $data['alamat'],
             'no_hp' => $data['no_hp'],
@@ -75,5 +75,9 @@ class RegisterController extends Controller
             'jenis_kelamin' => $data['jenis_kelamin'],
             'role' => 'user',
         ]);
+
+        $user->sendEmailVerificationNotification();
+
+        return $user;
     }
 }

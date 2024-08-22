@@ -27,6 +27,11 @@ class LandingController extends Controller
 
     public function index()
     {
+        if(Auth::check()){
+            if (Auth::user()->role == 'user' && !Auth::user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+        }
         $count_cart = $this->count_cart();
         $gors = Gor::orderBy('created_at', 'desc')->get();
         return view('index', compact('gors','count_cart'));

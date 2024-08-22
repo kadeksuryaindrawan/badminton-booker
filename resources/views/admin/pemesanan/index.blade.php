@@ -32,6 +32,7 @@
                                                 <th>No</th>
                                                 <th>Tanggal</th>
                                                 <th>Transaction ID</th>
+                                                <th>Gor</th>
                                                 <th>Nama Pelanggan</th>
                                                 <th>Total</th>
                                                 <th>Status</th>
@@ -44,10 +45,13 @@
                                                 $no=1;
                                             @endphp
                                             @foreach ($pemesanans as $pemesanan)
+                                                @foreach ($pemesanan->detail_order as $detail)
+                                                @endforeach
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ date("d M Y H:i:s",strtotime($pemesanan->created_at)) }}</td>
                                                     <td>{{ ucwords($pemesanan->transaction_id) }}</td>
+                                                    <td>{{ ucwords($detail->lapangan->gor->nama_gor) }}</td>
                                                     <td>{{ ucwords($pemesanan->user->nama) }}</td>
                                                     <td>Rp. {{ number_format($pemesanan->total,0,",",".") }}</td>
                                                     <td>

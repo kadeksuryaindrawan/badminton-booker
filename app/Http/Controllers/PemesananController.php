@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TransactionSuccess;
 use App\Models\Cart;
 use App\Models\DetailOrder;
 use App\Models\Lapangan;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class PemesananController extends Controller
 {
@@ -195,6 +197,8 @@ class PemesananController extends Controller
             Pemesanan::where('id', $id)->update([
                 'transaction_status' => 'terbayar',
             ]);
+
+            Mail::to($pemesanan->user->email)->send(new TransactionSuccess());
 
             return redirect()->route('daftar-pemesanan')->with('success', 'Berhasil terima pembayaran!');
         } catch (\Throwable $th) {
