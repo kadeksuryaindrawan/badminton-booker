@@ -8,10 +8,13 @@ jobs:
   thank_user:
     runs-on: ubuntu-latest
     steps:
-    - name: Post Thank You Message
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Add a comment
       uses: actions/github-script@v6
+      env:
+          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const actor = context.actor;
           const prNumber = context.payload.pull_request.number;
