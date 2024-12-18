@@ -7,14 +7,16 @@ on:
 jobs:
   thank_user:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Add a comment
       uses: actions/github-script@v6
-      env:
-          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
       with:
+        github-token: ${{ secrets.MY_PAT }}
         script: |
           const actor = context.actor;
           const prNumber = context.payload.pull_request.number;
@@ -22,5 +24,5 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: prNumber,
-            body: `Terima kasih, @${actor}, atas kontribusi anda🥳! Kami sangat menghargai upaya Anda.`
+            body: `Terima kasih, @${actor}, atas kontribusi Anda 🥳! Kami sangat menghargai upaya Anda.`
           });
