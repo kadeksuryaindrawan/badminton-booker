@@ -1,0 +1,23 @@
+name: User Pull Request
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  thank_user:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Post Thank You Message
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const actor = context.actor;
+          const prNumber = context.payload.pull_request.number;
+          github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: prNumber,
+            body: `Terima kasih, @${actor}, atas kontribusi anda🥳! Kami sangat menghargai upaya Anda.`
+          });
