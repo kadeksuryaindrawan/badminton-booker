@@ -13,7 +13,7 @@
                 <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                    <span class="hero-subtitle">Ayo Hidup SehatS</span>
+                    <span class="hero-subtitle">Ayo Hidup Sehat</span>
                     <h1 class="hero-title">Booking Lapangan Anda Sekarang</h1>
                     <p class="hero-text">Kami Menyediakan Berbagai Gor Dan Lapangan Bulu Tangkis Untuk Anda.</p>
                     <a href="{{ url('/daftar-gor') }}" class="vs-btn style4">Daftar Gor</a>
